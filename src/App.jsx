@@ -56,7 +56,8 @@ const NavBar = ({ currentView, setCurrentView, isAppLoaded, theme, setTheme }) =
         <span className="font-mono text-[clamp(8px,0.8vw,10px)] tracking-widest mt-1 uppercase text-neutral-400">DOP</span>
       </div>
       
-      <div className="hidden md:flex items-center gap-12">
+      <div className="flex items-center gap-12">
+        {/* Menu items temporarily hidden 
         {['COMMERCIAL', 'NARRATIVES', 'ABOUT', 'CONTACT'].map((item) => (
           <button 
             key={item}
@@ -66,11 +67,12 @@ const NavBar = ({ currentView, setCurrentView, isAppLoaded, theme, setTheme }) =
             {item}
           </button>
         ))}
+        */}
 
         {/* Premium Pill Theme Toggle */}
         <button 
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className={`ml-4 relative w-12 h-6 rounded-full p-1 flex items-center transition-colors duration-500 ${theme === 'dark' ? 'bg-white/20' : 'bg-black/20'}`}
+          className={`relative w-12 h-6 rounded-full p-1 flex items-center transition-colors duration-500 ${theme === 'dark' ? 'bg-white/20' : 'bg-black/20'}`}
           aria-label="Toggle Theme"
         >
           <div className={`absolute w-4 h-4 rounded-full shadow-md transform transition-transform duration-500 ease-[0.19,1,0.22,1] flex items-center justify-center ${theme === 'dark' ? 'translate-x-6 bg-white text-black' : 'translate-x-0 bg-white text-black'}`}>
@@ -81,14 +83,6 @@ const NavBar = ({ currentView, setCurrentView, isAppLoaded, theme, setTheme }) =
               )}
           </div>
         </button>
-      </div>
-
-      {/* Mobile Menu Toggle */}
-      <div className="md:hidden flex items-center justify-center w-8 h-8 cursor-pointer group">
-         <div className="w-full flex flex-col gap-1.5 items-end">
-            <div className={`w-full h-[1px] transition-all duration-300 bg-white group-hover:w-1/2`} />
-            <div className={`w-2/3 h-[1px] transition-all duration-300 bg-white group-hover:w-full`} />
-         </div>
       </div>
     </motion.nav>
   );
