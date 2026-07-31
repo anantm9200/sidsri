@@ -8,9 +8,9 @@ const HERO_IMAGES = [
 ];
 
 const HERO_CAPTIONS = [
-  "CRAFTING AVANT GARDE IMAGERY FOR BRANDS, FILMS AND STORIES THAT DEFY CONVENTION.",
-  "EXPLORING THE QUIET INTERSECTIONS OF HUMAN EMOTION AND CINEMATIC RESTRAINT.",
-  "DOCUMENTING THE SPACE BETWEEN FRAMES WITH RAW, UNFILTERED AUTHENTICITY."
+  "CRAFTING AVANT-GARDE IMAGERY.",
+  "EXPLORING CINEMATIC RESTRAINT.",
+  "DOCUMENTING AUTHENTICITY."
 ];
 
 const COMMERCIAL_PROJECTS = [
@@ -25,13 +25,6 @@ const NARRATIVE_PROJECTS = [
   { id: '02', title: 'GUILTY MINDS', type: 'SERIES', year: '2022', image: 'https://images.unsplash.com/photo-1505686994434-e3cc5abf1330?q=80&w=2000&auto=format&fit=crop', link: 'https://vimeo.com/siddharthdop' },
   { id: '03', title: 'INERTIA', type: 'SHORT FILM', year: '2021', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2000&auto=format&fit=crop', link: 'https://vimeo.com/siddharthdop' },
   { id: '04', title: 'THE ABSENCE', type: 'SHORT FILM', year: '2020', image: 'https://images.unsplash.com/photo-1518131672697-613bc04af255?q=80&w=2000&auto=format&fit=crop', link: 'https://vimeo.com/siddharthdop' },
-];
-
-const RECOGNITION = [
-  { year: '2023', title: 'CANNES LIONS', category: 'SHORTLIST - CINEMATOGRAPHY' },
-  { year: '2022', title: 'VIMEO STAFF PICK', category: 'BEST NARRATIVE SHORT' },
-  { year: '2022', title: 'BERLINALE', category: 'OFFICIAL SELECTION' },
-  { year: '2021', title: 'KODAK FILM AWARDS', category: 'EMERGING CINEMATOGRAPHER' },
 ];
 
 const CLIENTS = ["NIKE", "VOGUE", "ROYAL ENFIELD", "VIVO", "NETFLIX", "AMAZON PRIME", "GQ", "PORSCHE", "SONY MUSIC"];
@@ -57,17 +50,15 @@ const NavBar = ({ currentView, setCurrentView, isAppLoaded, theme, setTheme }) =
       </div>
       
       <div className="flex items-center gap-12">
-        {/* Menu items temporarily hidden 
-        {['COMMERCIAL', 'NARRATIVES', 'ABOUT', 'CONTACT'].map((item) => (
+        {['COMMERCIAL', 'NARRATIVES'].map((item) => (
           <button 
             key={item}
             onClick={() => setCurrentView(item.toLowerCase())}
-            className={`font-mono text-[10px] tracking-[0.2em] uppercase transition-colors ${currentView === item.toLowerCase() ? 'border-b pb-1 border-current' : 'text-neutral-500 hover:text-white'}`}
+            className={`font-mono text-[10px] tracking-[0.2em] uppercase transition-colors ${currentView === item.toLowerCase() ? 'border-b pb-1 border-current' : 'text-neutral-500 hover:text-current'}`}
           >
             {item}
           </button>
         ))}
-        */}
 
         {/* Premium Pill Theme Toggle */}
         <button 
@@ -104,9 +95,9 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
     <div className={`w-full min-h-screen transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#0A0A0A] text-white' : 'bg-[#f4f4f4] text-[#0A0A0A]'}`}>
       
       {/* 1. STICKY HERO SECTION */}
-      <section className={`sticky top-0 w-full h-[100dvh] overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-[#e5e5e5]'}`}>
+      <section className={`sticky top-0 w-full h-[100dvh] overflow-hidden ${theme === 'dark' ? 'bg-[#0A0A0A]' : 'bg-[#f4f4f4]'}`}>
         
-        {/* Cinematic Slideshow Background - 100% Color */}
+        {/* Background Layer with Blend Modes */}
         <AnimatePresence initial={false}>
           <motion.div
             key={currentSlide}
@@ -114,36 +105,48 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
             animate={{ opacity: 1, filter: 'blur(0px)' }}
             exit={{ opacity: 0, filter: 'blur(10px)', transition: { duration: 1.5 } }}
             transition={{ duration: 2, ease: 'easeOut' }}
-            className="absolute inset-0 z-0 origin-center bg-black"
+            // Use mix-blend-multiply in light mode so the image naturally blends with the #f4f4f4 background
+            className={`absolute inset-0 z-0 origin-center transition-all duration-1000 ${theme === 'dark' ? 'bg-black opacity-100' : 'bg-transparent mix-blend-multiply opacity-100'}`}
           >
             <motion.div 
-               initial={{ scale: 1 }}
-               animate={{ scale: 1.15 }}
+               initial={{ scale: 1.25 }} 
+               animate={{ scale: 1.4 }}
                transition={{ duration: 10, ease: 'linear' }}
                className="w-full h-full"
             >
+                {/* 1.25 scale crops out the vimeo black bars. Object-center keeps it focused. */}
                 <img 
                   src={HERO_IMAGES[currentSlide]} 
                   alt="Cinematic frame" 
-                  className={`w-full h-full object-cover transition-all duration-1000 ${theme === 'dark' ? 'opacity-90' : 'opacity-60'}`}
+                  className={`w-full h-full object-cover object-center transition-opacity duration-1000 ${theme === 'dark' ? 'opacity-80' : 'opacity-100'}`}
                 />
             </motion.div>
           </motion.div>
         </AnimatePresence>
 
-        {/* OVERLAYS: Deep Cinematic Gradients */}
-        <div className={`absolute inset-0 z-10 pointer-events-none transition-colors duration-1000 ${theme === 'dark' ? 'bg-gradient-to-r from-black via-black/40 to-transparent' : 'bg-gradient-to-r from-[#f4f4f4] via-[#f4f4f4]/80 to-transparent'}`} />
-        <div className={`absolute inset-0 z-10 pointer-events-none transition-colors duration-1000 ${theme === 'dark' ? 'bg-gradient-to-t from-black via-black/20 to-transparent' : 'bg-gradient-to-t from-[#f4f4f4] via-[#f4f4f4]/60 to-transparent'}`} />
+        {/* OVERLAYS: Only apply heavy gradients in Dark Mode */}
+        {theme === 'dark' && (
+          <>
+            <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-black via-black/40 to-transparent transition-opacity duration-1000" />
+            <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-t from-black via-black/20 to-transparent transition-opacity duration-1000" />
+          </>
+        )}
         
-        {/* LIGHT MODE MASK: Hides the baked-in Vimeo letterbox at the top */}
+        {/* Light Mode Specific Adjustments */}
         {theme === 'light' && (
-            <div className="absolute top-0 left-0 w-full h-[30vh] z-10 pointer-events-none bg-gradient-to-b from-[#f4f4f4] via-[#f4f4f4]/80 to-transparent transition-opacity duration-1000" />
+           <>
+              {/* Very soft white wash to ensure text readability without ruining the image blend */}
+              <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-r from-[#f4f4f4]/80 via-[#f4f4f4]/20 to-transparent transition-opacity duration-1000" />
+              {/* Soft bottom fade to blend with the scroll section below */}
+              <div className="absolute inset-x-0 bottom-0 h-1/3 z-10 pointer-events-none bg-gradient-to-t from-[#f4f4f4] to-transparent transition-opacity duration-1000" />
+           </>
         )}
 
-        {/* Foreground Content - Absolute Positioning for perfect centering */}
-        <div className="absolute inset-0 z-20 pointer-events-none">
+
+        {/* Foreground Content */}
+        <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-center">
           
-          {/* Vertically Centered Title Area - TRUE DEAD CENTER */}
+          {/* DEAD-CENTER TITLE */}
           <div className="absolute top-1/2 -translate-y-1/2 left-[3vw] w-full md:w-3/5 lg:w-2/3 flex flex-col leading-[1.05]">
             {words.map((word, i) => (
               <div key={i} className="overflow-hidden pb-1 md:pb-2">
@@ -162,7 +165,6 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
           {/* Strict Bottom Row Alignment */}
           <div className="absolute bottom-[8vh] left-[3vw] right-[3vw] flex justify-between items-end">
             
-            {/* LEFT: Bottom Aligned View Reel Button */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={isAppLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
@@ -174,11 +176,8 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
               <div className={`w-12 md:w-24 h-[1px] transition-all duration-500 ${theme === 'dark' ? 'bg-neutral-700 group-hover:bg-white' : 'bg-neutral-400 group-hover:bg-black'}`} />
             </motion.div>
 
-            {/* RIGHT: Dynamic Text & Pagination */}
             <div className="hidden md:flex flex-col items-end text-right">
-                
-                {/* Fixed Height Caption Container to prevent text clipping */}
-                <div className="overflow-hidden mb-6 h-24 relative w-full flex justify-end items-end">
+                <div className="overflow-hidden mb-6 h-12 relative w-full flex justify-end items-end">
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={currentSlide}
@@ -231,10 +230,10 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
         </div>
       </section>
 
-      {/* 2. Overlapping Scroll Section (Content layer) */}
+      {}
       <section className={`relative z-20 w-full pt-32 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
         
-        {/* DIRECTOR'S CUT / SHOWREEL */}
+        {/* DIRECTOR'S CUT */}
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -255,7 +254,7 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
           </a>
         </motion.div>
 
-        {/* SELECTED WORK - Minimalist Staggered Grid */}
+        {/* SELECTED WORK */}
         <div className="w-full flex flex-col px-[3vw] mb-48">
           <div className="flex justify-between items-end mb-24">
             <h2 className={`font-mono text-[10px] md:text-xs tracking-[0.4em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>Selected Work</h2>
@@ -283,40 +282,7 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
           </div>
         </div>
 
-        {/* RECOGNITION / AWARDS */}
-        <div className="w-full px-[3vw] mb-48">
-          <motion.div 
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            className={`flex justify-between items-end border-b pb-6 mb-12 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}
-          >
-            <h2 className={`font-mono text-[10px] md:text-xs tracking-[0.4em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>Recognition</h2>
-          </motion.div>
-          <div className="flex flex-col">
-             {RECOGNITION.map((award, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`flex flex-col md:flex-row justify-between py-6 md:py-8 border-b group transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800 hover:border-white' : 'border-neutral-200 hover:border-black'}`}
-                >
-                  <div className="flex gap-12 md:gap-24 items-center">
-                     <span className={`font-mono text-[10px] tracking-widest ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{award.year}</span>
-                     <h3 className={`font-sans text-xl md:text-3xl font-light uppercase tracking-wide transition-colors duration-500 ${theme === 'dark' ? 'text-neutral-300 group-hover:text-white' : 'text-neutral-600 group-hover:text-black'}`}>{award.title}</h3>
-                  </div>
-                  <div className="mt-2 md:mt-0 md:text-right flex items-center pl-[3.5rem] md:pl-0">
-                     <span className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{award.category}</span>
-                  </div>
-                </motion.div>
-             ))}
-          </div>
-        </div>
-
-        {/* STILLS ARCHIVE - Visual Gallery */}
+        {/* STILLS ARCHIVE */}
         <div className="w-full flex flex-col px-[3vw] pb-32">
           <div className="flex justify-between items-end mb-24">
             <h2 className={`font-mono text-[10px] md:text-xs tracking-[0.4em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>Visual Archive</h2>
@@ -337,6 +303,7 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
           </div>
         </div>
 
+        {}
         {/* INFINITE CLIENTS MARQUEE */}
         <div className={`w-full overflow-hidden py-16 md:py-32 border-y transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800 bg-[#070707]' : 'border-neutral-200 bg-[#ebebeb]'}`}>
           <motion.div 
@@ -345,7 +312,6 @@ const Home = ({ navigate, isAppLoaded, theme }) => {
             transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
           >
              <div className="flex gap-16 md:gap-32 px-8 items-center">
-               {/* Duplicate array for seamless loop */}
                {[...CLIENTS, ...CLIENTS].map((client, i) => (
                   <span key={i} className={`text-[clamp(3rem,6vw,7rem)] font-sans font-light tracking-tighter uppercase ${theme === 'dark' ? 'text-neutral-800' : 'text-neutral-300'}`}>
                      {client}
@@ -577,16 +543,6 @@ export default function App() {
                             projects={NARRATIVE_PROJECTS}
                             theme={theme}
                           />
-                      )}
-                      {(currentView === 'about' || currentView === 'contact') && (
-                        <motion.div 
-                            key="placeholder"
-                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="min-h-screen pt-40 px-[3vw] flex items-center justify-center flex-col gap-8"
-                        >
-                          <p className={`font-mono tracking-[0.3em] uppercase text-xs ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>Please refer to the footer on the home view.</p>
-                          <button onClick={() => setCurrentView('home')} className={`font-mono text-[10px] tracking-[0.3em] transition-colors border-b pb-1 ${theme === 'dark' ? 'text-white hover:text-neutral-500 border-white hover:border-neutral-500' : 'text-black hover:text-neutral-500 border-black hover:border-neutral-500'}`}>RETURN HOME</button>
-                        </motion.div>
                       )}
                   </AnimatePresence>
               </div>
