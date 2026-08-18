@@ -2,9 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1604928141064-207cea6f5722?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1575995872537-3793d29d972c?q=80&w=2000&auto=format&fit=crop"
+  "https://static.wixstatic.com/media/548938_68a80886267941c6ba30f54a49a5f89d~mv2.png",
+  "https://static.wixstatic.com/media/548938_b26ac6338a6340958f995f2f9139f042~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_693235626cde4240a802e8f159816c1e~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_6acfc125dd92439cb739c71cfd9fc470~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_ab4e6e1e06304510946f3168e92dfc8b~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_5c4cda34ef394704b82414d27a95f792~mv2.png",
+  "https://static.wixstatic.com/media/548938_1f3d4f5061d44a0d9de2fed17652b6f5~mv2.png",
+  "https://static.wixstatic.com/media/548938_878a3abfc96f4b64a9d14d473daba505~mv2.png",
+  "https://static.wixstatic.com/media/548938_6c2d0884857a4233abb6ee548efd8fe8~mv2.png",
+  "https://static.wixstatic.com/media/548938_dd62cb743bfd408885c6acdad50b67e6~mv2.jpg"
 ];
 
 const SELECTED_WORK = [
@@ -25,23 +32,21 @@ const COMMERCIAL_WORK = [
   { id: 4, title: 'SONY MUSIC', category: 'MUSIC', image: 'https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?q=80&w=1600&auto=format&fit=crop' },
 ];
 
-const CATEGORIES = ['ALL', 'LIFESTYLE', 'PROMO', 'HUMOR', 'MUSIC'];
-
 const App = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [theme, setTheme] = useState('dark');
   const [isAppLoaded, setIsAppLoaded] = useState(false);
-  const [activeView, setActiveView] = useState('home'); // 'home', 'commercial', 'narratives'
-  const [activeCategory, setActiveCategory] = useState('ALL');
+  const [activeView, setActiveView] = useState('home');
   
+  // Consolidating refs at the top level
   const footerRef = useRef(null);
-  const aboutRef = useRef(null);
+  const aboutRef = useRef(null); 
 
   useEffect(() => {
     setIsAppLoaded(true);
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 5000);
+    }, 4500); // Slightly faster pacing for a 10-image slideshow
     return () => clearInterval(interval);
   }, []);
 
@@ -54,7 +59,6 @@ const App = () => {
   const scrollToAbout = () => {
     if (activeView !== 'home') {
       setActiveView('home');
-      // Wait for home view to render before scrolling
       setTimeout(() => aboutRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
     } else {
       aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -89,28 +93,27 @@ const App = () => {
   return (
     <div className={`min-h-screen selection:bg-neutral-500/30 font-sans transition-colors duration-1000 ease-in-out ${theme === 'dark' ? 'bg-[#050505] text-[#ededed]' : 'bg-[#f4f4f4] text-[#111111]'}`}>
       
-      {}
+      { }
       <header className="fixed top-0 left-0 w-full z-50 px-[3vw] py-[3vh] flex justify-between items-start pointer-events-none mix-blend-difference text-white">
         <div 
           onClick={() => { setActiveView('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }} 
-          className="flex flex-col cursor-pointer pointer-events-auto group w-fit pr-8"
+          className="flex flex-col cursor-pointer pointer-events-auto group w-fit"
         >
-          {/* Logo hover animation (translates entire block right slightly) */}
-          <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4">
+          <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2">
             <h1 className="font-sans text-[clamp(14px,1.5vw,18px)] tracking-widest uppercase font-semibold leading-none">Siddharth Srinivasan</h1>
             <p className="font-mono text-[10px] tracking-[0.3em] uppercase mt-2 opacity-70">DOP</p>
           </div>
         </div>
 
         <div className="flex items-center gap-6 md:gap-12 pointer-events-auto">
-          {/* Navigation Links with identical slide animations */}
+          {/* Animated Navigation Links */}
           <button onClick={scrollToAbout} className="group cursor-pointer w-fit overflow-hidden py-2">
-             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-3">
+             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2">
                <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">ABOUT</span>
              </div>
           </button>
           <button onClick={scrollToFooter} className="group cursor-pointer w-fit overflow-hidden py-2">
-             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-3">
+             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2">
                <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">CONTACT</span>
              </div>
           </button>
@@ -120,7 +123,6 @@ const App = () => {
 
       <AnimatePresence mode="wait">
         
-        {}
         {/* === HOME VIEW === */}
         {activeView === 'home' && (
           <motion.div
@@ -130,25 +132,53 @@ const App = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* HERO SECTION - Now sticky to allow overlapping scroll */}
-            <section className="sticky top-0 w-full h-screen overflow-hidden bg-black z-0">
+            {/* HERO SECTION */}
+            <section className={`sticky top-0 w-full h-screen overflow-hidden ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
+              
+              {/* STREAMING_CHUNK:Image Masking for smooth gradient transition */}
+              <AnimatePresence mode="sync">
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0, scale: 1.15 }}
+                  animate={{ opacity: 1, scale: 1.1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 3.5, ease: "easeInOut" }}
+                  className="absolute inset-0 w-full h-full origin-center"
+                  style={{
+                    // This creates a smooth fade-to-background-color at the very bottom of the image
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
+                    maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)'
+                  }}
+                >
+                  <img
+                    src={HERO_IMAGES[currentImageIndex]}
+                    className="w-full h-full object-cover"
+                    alt="Cinematic Hero"
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Cinematic Letterbox Overlay - Standardizes aspect ratio to Widescreen */}
+              <div className="absolute top-0 left-0 w-full h-[12vh] bg-black z-10 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-full h-[12vh] bg-black z-10 pointer-events-none" />
+
               <AnimatePresence mode="sync">
                 <motion.img
                   key={currentImageIndex}
                   src={HERO_IMAGES[currentImageIndex]}
-                  initial={{ opacity: 0, scale: 1.3 }}
-                  animate={{ opacity: 1, scale: 1.25 }} // Scale 1.25 hides vimeo letterbox
+                  /* Scale 1.1 ensures baked-in black bars on some images are pushed safely underneath our perfect CSS letterboxing */
+                  initial={{ opacity: 0, scale: 1.15 }}
+                  animate={{ opacity: 1, scale: 1.1 }} 
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 2.5, ease: "easeInOut" }}
+                  transition={{ duration: 3.5, ease: "easeInOut" }}
                   className="absolute inset-0 w-full h-full object-cover origin-center"
                 />
               </AnimatePresence>
 
-              {/* Foreground Links - Using mix-blend-difference so they adapt to ANY image perfectly */}
-              <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-end pb-[8vh] px-[3vw] mix-blend-difference text-white">
+              {/* Foreground Links - Sits perfectly on top of the bottom cinematic black bar */}
+              <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-end pb-[4vh] md:pb-[5vh] px-[3vw] mix-blend-difference text-white">
                 <div className="flex justify-between items-end w-full">
                   
-                  {/* Left side: Direct Navigation Links */}
                   <div className="flex flex-col gap-6 md:gap-8 pointer-events-auto">
                     <motion.div 
                       initial={{ opacity: 0, x: -20 }}
@@ -181,10 +211,9 @@ const App = () => {
             </section>
 
             {}
-            {/* MAIN CONTENT SECTION (This section slides OVER the sticky hero) */}
             <section className={`relative z-30 w-full rounded-t-3xl md:rounded-t-[3rem] -mt-8 pt-16 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
               
-              {/* === ABOUT SECTION === */}
+              {/* ABOUT SECTION - Placeholder ready for client copy */}
               <div ref={aboutRef} className="w-full px-[3vw] pt-16 pb-32 md:pb-48">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
                   <div className="md:col-span-4 flex items-center gap-4">
@@ -199,7 +228,7 @@ const App = () => {
                 </div>
               </div>
 
-              {/* === DIRECTOR'S CUT === */}
+              {/* DIRECTOR'S CUT */}
               <div className="w-full flex justify-between items-end px-[3vw] mb-12">
                 <h2 className="text-[clamp(2rem,4vw,5rem)] font-sans font-light tracking-tighter uppercase leading-[0.85]">
                   Director's<br/><span className={theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}>Cut</span>
@@ -210,12 +239,12 @@ const App = () => {
                 </a>
               </div>
               <div className="w-full px-[3vw] mb-48">
-                <div className={`w-full aspect-video overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
+                <div className={`w-full aspect-[2.35/1] overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
                   <iframe src="https://player.vimeo.com/video/824804225?h=02ab566df5&title=0&byline=0&portrait=0" className="w-full h-full" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
                 </div>
               </div>
 
-              {/* === SELECTED WORKS GRID === */}
+              {/* SELECTED WORKS GRID */}
               <div className="w-full px-[3vw] pb-32">
                 <div className={`flex justify-between items-end border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
                   <h2 className={`font-mono text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>Selected Work</h2>
@@ -250,7 +279,7 @@ const App = () => {
         )}
 
         {}
-        {/* === COMMERCIALS VIEW === */}
+        {/* === COMMERCIALS VIEW (Full width grid) === */}
         {activeView === 'commercial' && (
           <motion.div
             key="commercial"
@@ -258,49 +287,34 @@ const App = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            className={`pt-40 px-[3vw] min-h-screen pb-32 relative z-30 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}
+            className="pt-40 px-[3vw] min-h-screen pb-32"
           >
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-              {/* Left Sidebar Filter */}
-              <div className="md:col-span-3">
-                <div className="sticky top-40 flex flex-col gap-6">
-                  <h2 className="font-mono text-xs tracking-[0.3em] uppercase mb-4 opacity-50">COMMERCIALS</h2>
-                  {CATEGORIES.map(category => (
-                    <button
-                      key={category}
-                      onClick={() => setActiveCategory(category)}
-                      className={`text-left font-sans text-xl md:text-3xl font-light uppercase tracking-wide transition-colors duration-300 ${activeCategory === category ? (theme === 'dark' ? 'text-white' : 'text-black') : (theme === 'dark' ? 'text-neutral-600 hover:text-white' : 'text-neutral-400 hover:text-black')}`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right Content Grid */}
-              <div className="md:col-span-9 flex flex-col gap-24">
-                <AnimatePresence mode="popLayout">
-                  {COMMERCIAL_WORK.filter(work => activeCategory === 'ALL' || work.category === activeCategory).map((work) => (
-                    <motion.div
-                      key={work.id}
-                      layout
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.5 }}
-                      className="w-full flex flex-col group cursor-pointer"
-                    >
-                      <div className={`w-full aspect-video overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
-                         <img src={work.image} alt={work.title} className="w-full h-full object-cover transition-transform duration-1000 ease-[0.19,1,0.22,1] group-hover:scale-105" />
-                      </div>
-                      <div className="flex justify-between items-start mt-6">
-                         <h3 className="text-2xl md:text-3xl font-sans uppercase font-light tracking-wide">{work.title}</h3>
-                         <span className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{work.category}</span>
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
+            <div className={`border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
+                <h2 className="font-mono text-xs tracking-[0.3em] uppercase opacity-50">COMMERCIALS</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12">
+              <AnimatePresence mode="popLayout">
+                {COMMERCIAL_WORK.map((work) => (
+                  <motion.div
+                    key={work.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full flex flex-col group cursor-pointer"
+                  >
+                    <div className={`w-full aspect-video overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
+                       <img src={work.image} alt={work.title} className="w-full h-full object-cover transition-transform duration-1000 ease-[0.19,1,0.22,1] group-hover:scale-105" />
+                    </div>
+                    <div className="flex justify-between items-start mt-6">
+                       <h3 className="text-2xl md:text-3xl font-sans uppercase font-light tracking-wide">{work.title}</h3>
+                       <span className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{work.category}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </motion.div>
         )}
@@ -340,10 +354,7 @@ const App = () => {
       </AnimatePresence>
 
       {}
-      {/* 
-        SEAMLESS UNIFIED FOOTER BLOCK 
-        No sticky overlaps. The pre-footer and footer are now one continuous block sharing the exact same background color for a perfect flow.
-      */}
+      {/* SEAMLESS UNIFIED FOOTER BLOCK */}
       <div className={`relative z-40 w-full flex flex-col transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
         
         {/* NORMAL FLOW PRE-FOOTER CALL TO ACTION */}
