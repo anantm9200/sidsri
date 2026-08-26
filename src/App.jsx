@@ -38,7 +38,6 @@ const App = () => {
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const [activeView, setActiveView] = useState('home');
   
-  // Consolidating refs at the top level
   const footerRef = useRef(null);
   const aboutRef = useRef(null); 
 
@@ -46,7 +45,7 @@ const App = () => {
     setIsAppLoaded(true);
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 4500); // Slightly faster pacing for a 10-image slideshow
+    }, 4500);
     return () => clearInterval(interval);
   }, []);
 
@@ -93,8 +92,8 @@ const App = () => {
   return (
     <div className={`min-h-screen selection:bg-neutral-500/30 font-sans transition-colors duration-1000 ease-in-out ${theme === 'dark' ? 'bg-[#050505] text-[#ededed]' : 'bg-[#f4f4f4] text-[#111111]'}`}>
       
-      { }
-      <header className="fixed top-0 left-0 w-full z-50 px-[3vw] py-[3vh] flex justify-between items-start pointer-events-none mix-blend-difference text-white">
+      {}
+      <header className={`fixed top-0 left-0 w-full z-50 px-[4vw] py-[4vh] flex justify-between items-start pointer-events-none transition-colors duration-1000 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         <div 
           onClick={() => { setActiveView('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }} 
           className="flex flex-col cursor-pointer pointer-events-auto group w-fit"
@@ -108,12 +107,12 @@ const App = () => {
         <div className="flex items-center gap-6 md:gap-12 pointer-events-auto">
           {/* Animated Navigation Links */}
           <button onClick={scrollToAbout} className="group cursor-pointer w-fit overflow-hidden py-2">
-             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2">
+             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4">
                <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">ABOUT</span>
              </div>
           </button>
           <button onClick={scrollToFooter} className="group cursor-pointer w-fit overflow-hidden py-2">
-             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2">
+             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4">
                <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">CONTACT</span>
              </div>
           </button>
@@ -132,89 +131,63 @@ const App = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* HERO SECTION */}
-            <section className={`sticky top-0 w-full h-screen overflow-hidden ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
+            {}
+            <section className="relative w-full min-h-screen pt-[18vh] pb-[8vh] px-[4vw] flex flex-col justify-between">
               
-              {/* STREAMING_CHUNK:Image Masking for smooth gradient transition */}
-              <AnimatePresence mode="sync">
-                <motion.div
-                  key={currentImageIndex}
-                  initial={{ opacity: 0, scale: 1.15 }}
-                  animate={{ opacity: 1, scale: 1.1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 3.5, ease: "easeInOut" }}
-                  className="absolute inset-0 w-full h-full origin-center"
-                  style={{
-                    // This creates a smooth fade-to-background-color at the very bottom of the image
-                    WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)',
-                    maskImage: 'linear-gradient(to bottom, black 0%, black 80%, transparent 100%)'
-                  }}
-                >
-                  <img
+              {/* Framed Image Container enforcing 16:9 composition without stretching */}
+              <div className="w-full md:w-[90%] mx-auto aspect-[16/9] relative overflow-hidden bg-black/5 rounded-sm">
+                <AnimatePresence mode="sync">
+                  <motion.img
+                    key={currentImageIndex}
                     src={HERO_IMAGES[currentImageIndex]}
-                    className="w-full h-full object-cover"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    /* Simplified animation: Only dissolve, no more zooming/scaling */
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full object-cover"
                     alt="Cinematic Hero"
                   />
-                </motion.div>
-              </AnimatePresence>
+                </AnimatePresence>
+              </div>
 
-              {/* Cinematic Letterbox Overlay - Standardizes aspect ratio to Widescreen */}
-              <div className="absolute top-0 left-0 w-full h-[12vh] bg-black z-10 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-full h-[12vh] bg-black z-10 pointer-events-none" />
+              {/* Foreground Links - Enlarged and placed clearly below the image frame */}
+              <div className="w-full flex justify-between items-end mt-12 md:mt-16 md:w-[90%] mx-auto pointer-events-none">
+                <div className="flex flex-col gap-6 md:gap-8 pointer-events-auto">
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isAppLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                    transition={{ delay: isAppLoaded ? 0.4 : 0, duration: 1, ease: [0.19, 1, 0.22, 1] }}
+                    className="flex items-center gap-6 cursor-pointer group w-fit"
+                    onClick={() => { setActiveView('commercial'); window.scrollTo(0,0); }}
+                  >
+                    <span className={`font-mono text-[clamp(20px,3vw,32px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIAL</span>
+                    <div className={`w-12 md:w-24 h-[1px] relative overflow-hidden ${theme === 'dark' ? 'bg-white/30' : 'bg-black/30'}`}>
+                       <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
+                    </div>
+                  </motion.div>
 
-              <AnimatePresence mode="sync">
-                <motion.img
-                  key={currentImageIndex}
-                  src={HERO_IMAGES[currentImageIndex]}
-                  /* Scale 1.1 ensures baked-in black bars on some images are pushed safely underneath our perfect CSS letterboxing */
-                  initial={{ opacity: 0, scale: 1.15 }}
-                  animate={{ opacity: 1, scale: 1.1 }} 
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 3.5, ease: "easeInOut" }}
-                  className="absolute inset-0 w-full h-full object-cover origin-center"
-                />
-              </AnimatePresence>
-
-              {/* Foreground Links - Sits perfectly on top of the bottom cinematic black bar */}
-              <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-end pb-[4vh] md:pb-[5vh] px-[3vw] mix-blend-difference text-white">
-                <div className="flex justify-between items-end w-full">
-                  
-                  <div className="flex flex-col gap-6 md:gap-8 pointer-events-auto">
-                    <motion.div 
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isAppLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                      transition={{ delay: isAppLoaded ? 0.8 : 0, duration: 1, ease: [0.19, 1, 0.22, 1] }}
-                      className="flex items-center gap-6 cursor-pointer group w-fit"
-                      onClick={() => { setActiveView('commercial'); window.scrollTo(0,0); }}
-                    >
-                      <span className="font-mono text-[clamp(12px,1.5vw,16px)] tracking-[0.3em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 text-white">COMMERCIAL</span>
-                      <div className="w-12 md:w-24 h-[1px] relative overflow-hidden bg-white/30">
-                         <div className="absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 bg-white" />
-                      </div>
-                    </motion.div>
-
-                    <motion.div 
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isAppLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                      transition={{ delay: isAppLoaded ? 1.0 : 0, duration: 1, ease: [0.19, 1, 0.22, 1] }}
-                      className="flex items-center gap-6 cursor-pointer group w-fit"
-                      onClick={() => { setActiveView('narratives'); window.scrollTo(0,0); }}
-                    >
-                      <span className="font-mono text-[clamp(12px,1.5vw,16px)] tracking-[0.3em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 text-white">NARRATIVES</span>
-                      <div className="w-12 md:w-24 h-[1px] relative overflow-hidden bg-white/30">
-                         <div className="absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 bg-white" />
-                      </div>
-                    </motion.div>
-                  </div>
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isAppLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                    transition={{ delay: isAppLoaded ? 0.6 : 0, duration: 1, ease: [0.19, 1, 0.22, 1] }}
+                    className="flex items-center gap-6 cursor-pointer group w-fit"
+                    onClick={() => { setActiveView('narratives'); window.scrollTo(0,0); }}
+                  >
+                    <span className={`font-mono text-[clamp(20px,3vw,32px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
+                    <div className={`w-12 md:w-24 h-[1px] relative overflow-hidden ${theme === 'dark' ? 'bg-white/30' : 'bg-black/30'}`}>
+                       <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
+                    </div>
+                  </motion.div>
                 </div>
               </div>
             </section>
 
             {}
-            <section className={`relative z-30 w-full rounded-t-3xl md:rounded-t-[3rem] -mt-8 pt-16 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
+            <section className="relative z-30 w-full pt-16">
               
               {/* ABOUT SECTION - Placeholder ready for client copy */}
-              <div ref={aboutRef} className="w-full px-[3vw] pt-16 pb-32 md:pb-48">
+              <div ref={aboutRef} className="w-full px-[4vw] pt-8 pb-32 md:pb-48">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
                   <div className="md:col-span-4 flex items-center gap-4">
                     <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
@@ -228,24 +201,9 @@ const App = () => {
                 </div>
               </div>
 
-              {/* DIRECTOR'S CUT */}
-              <div className="w-full flex justify-between items-end px-[3vw] mb-12">
-                <h2 className="text-[clamp(2rem,4vw,5rem)] font-sans font-light tracking-tighter uppercase leading-[0.85]">
-                  Director's<br/><span className={theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}>Cut</span>
-                </h2>
-                <a href="https://vimeo.com" target="_blank" rel="noreferrer" className="group flex items-center gap-4 cursor-pointer pb-2">
-                   <span className="font-mono text-[10px] tracking-[0.2em] uppercase transition-transform duration-500 group-hover:-translate-x-2">Watch on Vimeo</span>
-                   <div className={`w-8 h-[1px] ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
-                </a>
-              </div>
-              <div className="w-full px-[3vw] mb-48">
-                <div className={`w-full aspect-[2.35/1] overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
-                  <iframe src="https://player.vimeo.com/video/824804225?h=02ab566df5&title=0&byline=0&portrait=0" className="w-full h-full" frameBorder="0" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen></iframe>
-                </div>
-              </div>
-
+              {}
               {/* SELECTED WORKS GRID */}
-              <div className="w-full px-[3vw] pb-32">
+              <div className="w-full px-[4vw] pb-32">
                 <div className={`flex justify-between items-end border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
                   <h2 className={`font-mono text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>Selected Work</h2>
                   <span className={`font-mono text-[10px] tracking-widest ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>03 / {SELECTED_WORK.length.toString().padStart(2, '0')}</span>
@@ -287,7 +245,7 @@ const App = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            className="pt-40 px-[3vw] min-h-screen pb-32"
+            className="pt-40 px-[4vw] min-h-screen pb-32"
           >
             <div className={`border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
                 <h2 className="font-mono text-xs tracking-[0.3em] uppercase opacity-50">COMMERCIALS</h2>
@@ -328,7 +286,7 @@ const App = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            className={`pt-40 px-[3vw] min-h-screen pb-32 relative z-30 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}
+            className={`pt-40 px-[4vw] min-h-screen pb-32 relative z-30 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}
           >
             <div className={`border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
                 <h2 className="font-mono text-xs tracking-[0.3em] uppercase opacity-50">NARRATIVES</h2>
@@ -357,31 +315,8 @@ const App = () => {
       {/* SEAMLESS UNIFIED FOOTER BLOCK */}
       <div className={`relative z-40 w-full flex flex-col transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
         
-        {/* NORMAL FLOW PRE-FOOTER CALL TO ACTION */}
-        <div className="relative w-full pt-48 pb-24 flex flex-col justify-center items-center text-center px-[3vw]">
-          <motion.div 
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.8 }}
-          >
-            <a 
-              href="mailto:hello@siddharth.com" 
-              className="group relative inline-flex flex-col items-center cursor-pointer"
-            >
-              <span className={`text-[clamp(3rem,8vw,10rem)] font-sans font-light tracking-tight uppercase leading-none transition-colors duration-500 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-                LET'S CRAFT
-              </span>
-              <span className={`text-[clamp(3rem,8vw,10rem)] font-sans font-light tracking-tight uppercase leading-none transition-colors duration-500 italic ${theme === 'dark' ? 'text-neutral-600 group-hover:text-white' : 'text-neutral-300 group-hover:text-black'}`}>
-                THE UNSEEN.
-              </span>
-              <div className={`absolute -bottom-8 left-1/2 -translate-x-1/2 w-0 group-hover:w-full h-[1px] transition-all duration-700 ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
-            </a>
-          </motion.div>
-        </div>
-
         {/* TYPOGRAPHIC EDITORIAL FOOTER */}
-        <footer ref={footerRef} className={`relative w-full pb-8 px-[3vw] flex flex-col justify-between overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+        <footer ref={footerRef} className={`relative w-full pt-32 pb-8 px-[4vw] flex flex-col justify-between overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
            <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-4 mb-32 w-full">
               <div className="col-span-1 md:col-span-3 flex flex-col">
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Profile</span>
