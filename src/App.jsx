@@ -1,17 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+/* STREAMING_CHUNK:Updating Hero Images with the new uniform aspect ratio .jpeg links */
 const HERO_IMAGES = [
-  "https://static.wixstatic.com/media/548938_68a80886267941c6ba30f54a49a5f89d~mv2.png",
-  "https://static.wixstatic.com/media/548938_b26ac6338a6340958f995f2f9139f042~mv2.jpg",
-  "https://static.wixstatic.com/media/548938_693235626cde4240a802e8f159816c1e~mv2.jpg",
-  "https://static.wixstatic.com/media/548938_6acfc125dd92439cb739c71cfd9fc470~mv2.jpg",
-  "https://static.wixstatic.com/media/548938_ab4e6e1e06304510946f3168e92dfc8b~mv2.jpg",
-  "https://static.wixstatic.com/media/548938_5c4cda34ef394704b82414d27a95f792~mv2.png",
-  "https://static.wixstatic.com/media/548938_1f3d4f5061d44a0d9de2fed17652b6f5~mv2.png",
-  "https://static.wixstatic.com/media/548938_878a3abfc96f4b64a9d14d473daba505~mv2.png",
-  "https://static.wixstatic.com/media/548938_6c2d0884857a4233abb6ee548efd8fe8~mv2.png",
-  "https://static.wixstatic.com/media/548938_dd62cb743bfd408885c6acdad50b67e6~mv2.jpg"
+  "https://static.wixstatic.com/media/548938_6d8f377d7f2445c19fb52f19f17ac89d~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_55c7bdc92e504069ab34dd0277a85997~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_39cb30299b7148f9985b1e6bebfc070e~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_95f181bc9f2741ca8cf62e6fa73d864c~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_44e9e85a12ef4de9b6f9da62be5cf2e5~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_3d1f72fdec51489890f13e44a3efc387~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_1b8f8c6d08b34a1a99d84d2ac44c1683~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_8fd10d8c65474c448858dd460e445512~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_35fb702748e04958bf7df2efd19299b9~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_a23dc6a28ec04a1cb6382542866f9a2d~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_2aa9e63357724f2da0b435dcd31af612~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_e0812f1a567944c2b91ebb7d0bd262e2~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_bd8380d3a9474a13bfe1380b36505459~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_471503fd385a41e3841e14a22c31e2c5~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_d44bc0816c2f4e478610607211f6c9b8~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_90b16d4d2b1c4147b957a8af163fb8bd~mv2.jpeg",
+  "https://static.wixstatic.com/media/548938_de942c33b1ab467e860231d76d32b3b1~mv2.jpeg"
 ];
 
 const SELECTED_WORK = [
@@ -32,6 +40,13 @@ const COMMERCIAL_WORK = [
   { id: 4, title: 'SONY MUSIC', category: 'MUSIC', image: 'https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?q=80&w=1600&auto=format&fit=crop' },
 ];
 
+const getPagination = (current, total) => {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i);
+  if (current <= 3) return [0, 1, 2, 3, 4, '...', total - 1];
+  if (current >= total - 4) return [0, '...', total - 5, total - 4, total - 3, total - 2, total - 1];
+  return [0, '...', current - 1, current, current + 1, '...', total - 1];
+};
+
 const App = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [theme, setTheme] = useState('dark');
@@ -40,6 +55,7 @@ const App = () => {
   
   const footerRef = useRef(null);
   const aboutRef = useRef(null); 
+  const nextSectionRef = useRef(null);
 
   useEffect(() => {
     setIsAppLoaded(true);
@@ -63,6 +79,10 @@ const App = () => {
       aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  
+  const scrollDown = () => {
+      nextSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   const ThemeToggle = () => (
     <button 
@@ -71,18 +91,38 @@ const App = () => {
       aria-label="Toggle Theme"
     >
       <motion.div 
-        className={`w-5 h-5 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-black' : 'bg-white'} shadow-sm`}
+        className={`w-5 h-5 rounded-full flex items-center justify-center absolute shadow-sm ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
         layout
+        initial={false}
+        animate={{ 
+          x: theme === 'dark' ? 28 : 0, 
+          rotate: theme === 'dark' ? 180 : 0 
+        }}
         transition={{ type: "spring", stiffness: 700, damping: 30 }}
-        style={{ marginLeft: theme === 'dark' ? 'auto' : '0' }}
       >
         {theme === 'dark' ? (
-          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          // f/8 (Closed Aperture for Dark Mode)
+          <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="12,8 15.5,10 15.5,14 12,16 8.5,14 8.5,10" />
+            <line x1="12" y1="2" x2="12" y2="8" />
+            <line x1="20.5" y1="7" x2="15.5" y2="10" />
+            <line x1="20.5" y1="17" x2="15.5" y2="14" />
+            <line x1="12" y1="22" x2="12" y2="16" />
+            <line x1="3.5" y1="17" x2="8.5" y2="14" />
+            <line x1="3.5" y1="7" x2="8.5" y2="10" />
           </svg>
         ) : (
-          <svg className="w-3 h-3 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          // f/2.8 (Open Aperture for Light Mode)
+          <svg className="w-3 h-3 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="12,4 18.9,8 18.9,16 12,20 5.1,16 5.1,8" />
+            <line x1="12" y1="2" x2="12" y2="4" />
+            <line x1="20.7" y1="7" x2="18.9" y2="8" />
+            <line x1="20.7" y1="17" x2="18.9" y2="16" />
+            <line x1="12" y1="22" x2="12" y2="20" />
+            <line x1="3.3" y1="17" x2="5.1" y2="16" />
+            <line x1="3.3" y1="7" x2="5.1" y2="8" />
           </svg>
         )}
       </motion.div>
@@ -92,7 +132,7 @@ const App = () => {
   return (
     <div className={`min-h-screen selection:bg-neutral-500/30 font-sans transition-colors duration-1000 ease-in-out ${theme === 'dark' ? 'bg-[#050505] text-[#ededed]' : 'bg-[#f4f4f4] text-[#111111]'}`}>
       
-      {}
+      {/* Fixed Header */}
       <header className={`fixed top-0 left-0 w-full z-50 px-[4vw] py-[4vh] flex justify-between items-start pointer-events-none transition-colors duration-1000 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         <div 
           onClick={() => { setActiveView('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }} 
@@ -105,7 +145,6 @@ const App = () => {
         </div>
 
         <div className="flex items-center gap-6 md:gap-12 pointer-events-auto">
-          {/* Animated Navigation Links */}
           <button onClick={scrollToAbout} className="group cursor-pointer w-fit overflow-hidden py-2">
              <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4">
                <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">ABOUT</span>
@@ -131,11 +170,11 @@ const App = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {}
-            <section className="relative w-full min-h-screen pt-[18vh] pb-[8vh] px-[4vw] flex flex-col justify-between">
+           {/* HERO SECTION */}
+            <section className="relative w-full h-[100svh] flex flex-col items-center justify-center pt-[12vh] pb-[4vh]">
               
               {/* Framed Image Container enforcing 16:9 composition without stretching */}
-              <div className="w-full md:w-[90%] mx-auto aspect-[16/9] relative overflow-hidden bg-black/5 rounded-sm">
+              <div className="w-[92vw] md:w-[85vw] mx-auto aspect-[16/9] relative overflow-hidden bg-black/5 rounded-sm">
                 <AnimatePresence mode="sync">
                   <motion.img
                     key={currentImageIndex}
@@ -143,50 +182,95 @@ const App = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    /* Simplified animation: Only dissolve, no more zooming/scaling */
-                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
                     className="absolute inset-0 w-full h-full object-cover"
                     alt="Cinematic Hero"
                   />
                 </AnimatePresence>
               </div>
 
-              {/* Foreground Links - Enlarged and placed clearly below the image frame */}
-              <div className="w-full flex justify-between items-end mt-12 md:mt-16 md:w-[90%] mx-auto pointer-events-none">
-                <div className="flex flex-col gap-6 md:gap-8 pointer-events-auto">
+              {/* STREAMING_CHUNK:Center-aligned Pagination Configuration */}
+              {/* Centralized Pagination & Controls */}
+              <div className="w-[92vw] md:w-[85vw] mx-auto mt-4 md:mt-8 flex justify-center items-center pointer-events-auto relative">
+                 
+                 {/* Center-aligned Numbers */}
+                 <div className="flex gap-2 md:gap-4 items-center">
+                    {getPagination(currentImageIndex, HERO_IMAGES.length).map((page, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => typeof page === 'number' && setCurrentImageIndex(page)}
+                        disabled={typeof page !== 'number'}
+                        className={`font-mono text-[11px] md:text-sm tracking-widest transition-colors duration-300 min-w-[24px] text-center ${
+                          page === currentImageIndex 
+                            ? (theme === 'dark' ? 'text-white font-bold' : 'text-black font-bold') 
+                            : typeof page === 'number' 
+                              ? (theme === 'dark' ? 'text-neutral-600 hover:text-white' : 'text-neutral-400 hover:text-black')
+                              : (theme === 'dark' ? 'text-neutral-700 cursor-default' : 'text-neutral-300 cursor-default')
+                        }`}
+                      >
+                        {typeof page === 'number' ? (page + 1).toString() : page}
+                      </button>
+                    ))}
+                 </div>
+                 
+                 {/* Right-aligned Next Button within the pagination row */}
+                 <button 
+                   onClick={() => setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length)}
+                   className={`absolute right-0 font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap pl-4 ${
+                     theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-black'
+                   }`}
+                 >
+                   NEXT
+                   <span className="text-[10px] md:text-xs mb-[2px]">→</span>
+                 </button>
+              </div>
+
+              {/* STREAMING_CHUNK:Floating Navigation Links */}
+              {/* Floating Bottom Navigation Links */}
+              <div className="absolute bottom-6 left-0 w-full px-[4vw] flex justify-between items-end pointer-events-none z-40">
                   <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isAppLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isAppLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ delay: isAppLoaded ? 0.4 : 0, duration: 1, ease: [0.19, 1, 0.22, 1] }}
-                    className="flex items-center gap-6 cursor-pointer group w-fit"
-                    onClick={() => { setActiveView('commercial'); window.scrollTo(0,0); }}
+                    className="pointer-events-auto"
                   >
-                    <span className={`font-mono text-[clamp(20px,3vw,32px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIAL</span>
-                    <div className={`w-12 md:w-24 h-[1px] relative overflow-hidden ${theme === 'dark' ? 'bg-white/30' : 'bg-black/30'}`}>
-                       <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
+                    <div 
+                        className="flex flex-col cursor-pointer group w-fit"
+                        onClick={() => { setActiveView('commercial'); window.scrollTo(0,0); }}
+                    >
+                        <div className="flex items-center gap-4">
+                            <span className={`font-mono text-[clamp(14px,2vw,20px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIAL</span>
+                        </div>
+                        <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
+                           <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
+                        </div>
                     </div>
                   </motion.div>
 
                   <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isAppLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isAppLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ delay: isAppLoaded ? 0.6 : 0, duration: 1, ease: [0.19, 1, 0.22, 1] }}
-                    className="flex items-center gap-6 cursor-pointer group w-fit"
-                    onClick={() => { setActiveView('narratives'); window.scrollTo(0,0); }}
+                    className="pointer-events-auto"
                   >
-                    <span className={`font-mono text-[clamp(20px,3vw,32px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
-                    <div className={`w-12 md:w-24 h-[1px] relative overflow-hidden ${theme === 'dark' ? 'bg-white/30' : 'bg-black/30'}`}>
-                       <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
+                     <div 
+                        className="flex flex-col items-end cursor-pointer group w-fit"
+                        onClick={() => { setActiveView('narratives'); window.scrollTo(0,0); }}
+                    >
+                        <div className="flex items-center gap-4">
+                            <span className={`font-mono text-[clamp(14px,2vw,20px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:-translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
+                        </div>
+                        <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
+                           <div className={`absolute inset-0 origin-right scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
+                        </div>
                     </div>
                   </motion.div>
-                </div>
               </div>
             </section>
 
-            {}
-            <section className="relative z-30 w-full pt-16">
+            <section ref={nextSectionRef} className="relative z-30 w-full pt-16 md:pt-32">
               
-              {/* ABOUT SECTION - Placeholder ready for client copy */}
+              {/* ABOUT SECTION */}
               <div ref={aboutRef} className="w-full px-[4vw] pt-8 pb-32 md:pb-48">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
                   <div className="md:col-span-4 flex items-center gap-4">
@@ -201,7 +285,6 @@ const App = () => {
                 </div>
               </div>
 
-              {}
               {/* SELECTED WORKS GRID */}
               <div className="w-full px-[4vw] pb-32">
                 <div className={`flex justify-between items-end border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
@@ -236,8 +319,7 @@ const App = () => {
           </motion.div>
         )}
 
-        {}
-        {/* === COMMERCIALS VIEW (Full width grid) === */}
+        {/* === COMMERCIALS VIEW === */}
         {activeView === 'commercial' && (
           <motion.div
             key="commercial"
@@ -277,7 +359,6 @@ const App = () => {
           </motion.div>
         )}
 
-        {}
         {/* === NARRATIVES VIEW === */}
         {activeView === 'narratives' && (
           <motion.div
@@ -311,7 +392,6 @@ const App = () => {
         )}
       </AnimatePresence>
 
-      {}
       {/* SEAMLESS UNIFIED FOOTER BLOCK */}
       <div className={`relative z-40 w-full flex flex-col transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
         
