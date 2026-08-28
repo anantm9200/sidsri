@@ -193,6 +193,17 @@ const App = () => {
               {/* Centralized Pagination & Controls */}
               <div className="w-[92vw] md:w-[85vw] mx-auto mt-4 md:mt-8 flex justify-center items-center pointer-events-auto relative">
                  
+                 {/* Left-aligned Previous Button */}
+                 <button 
+                   onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? HERO_IMAGES.length - 1 : prev - 1))}
+                   className={`absolute left-0 font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap pr-4 ${
+                     theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-black'
+                   }`}
+                 >
+                   <span className="text-[10px] md:text-xs mb-[2px]">←</span>
+                   PREV
+                 </button>
+
                  {/* Center-aligned Numbers */}
                  <div className="flex gap-2 md:gap-4 items-center">
                     {getPagination(currentImageIndex, HERO_IMAGES.length).map((page, idx) => (
