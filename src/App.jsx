@@ -84,51 +84,7 @@ const App = () => {
       nextSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  const ThemeToggle = () => (
-    <button 
-      onClick={toggleTheme}
-      className={`relative flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'bg-[#222]' : 'bg-[#e5e5e5]'}`}
-      aria-label="Toggle Theme"
-    >
-      <motion.div 
-        className={`w-5 h-5 rounded-full flex items-center justify-center absolute shadow-sm ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}
-        layout
-        initial={false}
-        animate={{ 
-          x: theme === 'dark' ? 28 : 0, 
-          rotate: theme === 'dark' ? 180 : 0 
-        }}
-        transition={{ type: "spring", stiffness: 700, damping: 30 }}
-      >
-        {theme === 'dark' ? (
-          // f/8 (Closed Aperture for Dark Mode)
-          <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <polygon points="12,8 15.5,10 15.5,14 12,16 8.5,14 8.5,10" />
-            <line x1="12" y1="2" x2="12" y2="8" />
-            <line x1="20.5" y1="7" x2="15.5" y2="10" />
-            <line x1="20.5" y1="17" x2="15.5" y2="14" />
-            <line x1="12" y1="22" x2="12" y2="16" />
-            <line x1="3.5" y1="17" x2="8.5" y2="14" />
-            <line x1="3.5" y1="7" x2="8.5" y2="10" />
-          </svg>
-        ) : (
-          // f/2.8 (Open Aperture for Light Mode)
-          <svg className="w-3 h-3 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <polygon points="12,4 18.9,8 18.9,16 12,20 5.1,16 5.1,8" />
-            <line x1="12" y1="2" x2="12" y2="4" />
-            <line x1="20.7" y1="7" x2="18.9" y2="8" />
-            <line x1="20.7" y1="17" x2="18.9" y2="16" />
-            <line x1="12" y1="22" x2="12" y2="20" />
-            <line x1="3.3" y1="17" x2="5.1" y2="16" />
-            <line x1="3.3" y1="7" x2="5.1" y2="8" />
-          </svg>
-        )}
-      </motion.div>
-    </button>
-  );
-
+  {/* STREAMING_CHUNK:Inlining Theme Toggle to fix React unmount bug */}
   return (
     <div className={`min-h-screen selection:bg-neutral-500/30 font-sans transition-colors duration-1000 ease-in-out ${theme === 'dark' ? 'bg-[#050505] text-[#ededed]' : 'bg-[#f4f4f4] text-[#111111]'}`}>
       
@@ -155,7 +111,45 @@ const App = () => {
                <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">CONTACT</span>
              </div>
           </button>
-          <ThemeToggle />
+          
+          {/* Natively inlined toggle - ensures React animates instead of remounting */}
+          <button 
+            onClick={toggleTheme}
+            className={`relative flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'bg-[#222]' : 'bg-[#e5e5e5]'}`}
+            aria-label="Toggle Theme"
+          >
+            <div 
+              className="w-5 h-5 rounded-full flex items-center justify-center absolute shadow-sm overflow-hidden transition-all duration-700 ease-[0.19,1,0.22,1]"
+              style={{
+                  transform: `translateX(${theme === 'dark' ? '28px' : '0px'}) rotate(${theme === 'dark' ? '360deg' : '0deg'})`,
+                  backgroundColor: theme === 'dark' ? 'black' : 'white'
+              }}
+            >
+              {/* Light Mode Icon (f/2.8) */}
+              <svg className={`absolute w-3 h-3 text-black transition-opacity duration-500 ease-in-out ${theme === 'dark' ? 'opacity-0' : 'opacity-100'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="12,4 18.9,8 18.9,16 12,20 5.1,16 5.1,8" />
+                <line x1="12" y1="2" x2="12" y2="4" />
+                <line x1="20.7" y1="7" x2="18.9" y2="8" />
+                <line x1="20.7" y1="17" x2="18.9" y2="16" />
+                <line x1="12" y1="22" x2="12" y2="20" />
+                <line x1="3.3" y1="17" x2="5.1" y2="16" />
+                <line x1="3.3" y1="7" x2="5.1" y2="8" />
+              </svg>
+
+              {/* Dark Mode Icon (f/8) */}
+              <svg className={`absolute w-3 h-3 text-white transition-opacity duration-500 ease-in-out ${theme === 'dark' ? 'opacity-100' : 'opacity-0'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="12,8 15.5,10 15.5,14 12,16 8.5,14 8.5,10" />
+                <line x1="12" y1="2" x2="12" y2="8" />
+                <line x1="20.5" y1="7" x2="15.5" y2="10" />
+                <line x1="20.5" y1="17" x2="15.5" y2="14" />
+                <line x1="12" y1="22" x2="12" y2="16" />
+                <line x1="3.5" y1="17" x2="8.5" y2="14" />
+                <line x1="3.5" y1="7" x2="8.5" y2="10" />
+              </svg>
+            </div>
+          </button>
         </div>
       </header>
 
