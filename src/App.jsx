@@ -3,23 +3,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 /* STREAMING_CHUNK:Updating Hero Images with the new uniform aspect ratio .jpeg links */
 const HERO_IMAGES = [
-  "https://static.wixstatic.com/media/548938_6d8f377d7f2445c19fb52f19f17ac89d~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_55c7bdc92e504069ab34dd0277a85997~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_39cb30299b7148f9985b1e6bebfc070e~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_95f181bc9f2741ca8cf62e6fa73d864c~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_44e9e85a12ef4de9b6f9da62be5cf2e5~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_3d1f72fdec51489890f13e44a3efc387~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_1b8f8c6d08b34a1a99d84d2ac44c1683~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_8fd10d8c65474c448858dd460e445512~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_35fb702748e04958bf7df2efd19299b9~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_a23dc6a28ec04a1cb6382542866f9a2d~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_2aa9e63357724f2da0b435dcd31af612~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_e0812f1a567944c2b91ebb7d0bd262e2~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_bd8380d3a9474a13bfe1380b36505459~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_471503fd385a41e3841e14a22c31e2c5~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_d44bc0816c2f4e478610607211f6c9b8~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_90b16d4d2b1c4147b957a8af163fb8bd~mv2.jpeg",
-  "https://static.wixstatic.com/media/548938_de942c33b1ab467e860231d76d32b3b1~mv2.jpeg"
+  "https://static.wixstatic.com/media/548938_f62846ba164e46ef9c722e67b3ae2076~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_995acf11ce4d45b3a3f9138bee23e6c1~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_e391b9d5756a4477b2211a2fc3dd03ae~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_5ecc695809b948df9069a41fdf9b30b7~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_2df5e88fe8bc4d94b08813b66e64735a~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_45d7534b0f0b4479a1266b8ad050fd80~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_5473e8fd41ec4eefb537b72fa37de320~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_8ce2bc9c3b8743698d5bf83607b0a9c1~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_183660d8ee1c407ca2b61c65f2f09e33~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_1b29c53bb37940488f781b277b235d4d~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_aad3e1b45dfd47ff89cbdcd39c156264~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_3f6d40bd67aa4ea495d8922d6f73214a~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_00fc91a3e95149d09ce2064f4ebbf149~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_3a0fb42b407d40f691ae9bb59fd51d5a~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_d515d2de1ed045ef92b955c14d6753df~mv2.jpg",
+  "https://static.wixstatic.com/media/548938_0a940d6217ad436faab14175cc4bb5b2~mv2.jpg"
 ];
 
 const SELECTED_WORK = [
