@@ -166,8 +166,8 @@ const App = () => {
            {/* HERO SECTION */}
             <section className="relative w-full h-[100svh] flex flex-col items-center justify-center pt-[12vh] pb-[4vh]">
               
-              {/* Framed Image Container enforcing 16:9 composition without stretching */}
-              <div className="w-[92vw] md:w-[85vw] mx-auto aspect-[16/9] relative overflow-hidden bg-black/5 rounded-sm">
+              {/* Scaled-down Framed Image Container - using max-width to prevent low-res stretching */}
+              <div className="w-[92vw] max-w-[900px] mx-auto aspect-[16/9] relative overflow-hidden bg-transparent rounded-sm">
                 <AnimatePresence mode="sync">
                   <motion.img
                     key={currentImageIndex}
@@ -175,21 +175,21 @@ const App = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full object-contain"
                     alt="Cinematic Hero"
                   />
                 </AnimatePresence>
               </div>
 
-              {/* STREAMING_CHUNK:Center-aligned Pagination Configuration */}
-              {/* Centralized Pagination & Controls */}
-              <div className="w-[92vw] md:w-[85vw] mx-auto mt-4 md:mt-8 flex justify-center items-center pointer-events-auto relative">
+              {/* STREAMING_CHUNK:Separating Pagination and Prev/Next to fix layout collisions */}
+              {/* Image Controls Container */}
+              <div className="w-[92vw] max-w-[900px] mx-auto mt-6 md:mt-8 flex justify-between items-center pointer-events-auto">
                  
                  {/* Left-aligned Previous Button */}
                  <button 
                    onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? HERO_IMAGES.length - 1 : prev - 1))}
-                   className={`absolute left-0 font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap pr-4 ${
+                   className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap ${
                      theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-black'
                    }`}
                  >
@@ -198,7 +198,7 @@ const App = () => {
                  </button>
 
                  {/* Center-aligned Numbers */}
-                 <div className="flex gap-2 md:gap-4 items-center">
+                 <div className="flex gap-2 md:gap-4 items-center absolute left-1/2 -translate-x-1/2">
                     {getPagination(currentImageIndex, HERO_IMAGES.length).map((page, idx) => (
                       <button
                         key={idx}
@@ -217,10 +217,10 @@ const App = () => {
                     ))}
                  </div>
                  
-                 {/* Right-aligned Next Button within the pagination row */}
+                 {/* Right-aligned Next Button */}
                  <button 
                    onClick={() => setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length)}
-                   className={`absolute right-0 font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap pl-4 ${
+                   className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap ${
                      theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-black'
                    }`}
                  >
@@ -229,7 +229,6 @@ const App = () => {
                  </button>
               </div>
 
-              {/* STREAMING_CHUNK:Floating Navigation Links */}
               {/* Floating Bottom Navigation Links */}
               <div className="absolute bottom-6 left-0 w-full px-[4vw] flex justify-between items-end pointer-events-none z-40">
                   <motion.div 
