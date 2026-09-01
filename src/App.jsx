@@ -164,11 +164,11 @@ const App = () => {
             transition={{ duration: 0.8 }}
           >
             {/* HERO SECTION */}
-            <section className="relative w-full h-[100svh] flex flex-col items-center justify-center pt-[12vh] pb-[4vh]">
+            <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center pt-[12vh] pb-[8vh]">
               
-              {/* STREAMING_CHUNK:Adding max-w to enforce side padding while maintaining vh height logic */}
-              {/* Master Container: Scales based on viewport height, maintaining 16:9 ratio, but never wider than 90vw */}
-              <div className="w-[92vw] md:w-auto md:h-[70vh] md:max-w-[90vw] aspect-[16/9] relative flex flex-col pointer-events-auto">
+              {/* STREAMING_CHUNK:Enforcing exact 94vw width for 3% left/right padding */}
+              {/* Master Container: 94vw width guarantees exactly 3vw (3%) padding on left and right */}
+              <div className="w-[94vw] aspect-[16/9] relative flex flex-col pointer-events-auto">
                 
                 {/* Image Frame */}
                 <div className="w-full h-full relative overflow-hidden bg-transparent rounded-sm">
