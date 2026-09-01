@@ -163,70 +163,74 @@ const App = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
           >
-           {/* HERO SECTION */}
+            {/* HERO SECTION */}
             <section className="relative w-full h-[100svh] flex flex-col items-center justify-center pt-[12vh] pb-[4vh]">
               
-              {/* Scaled-down Framed Image Container - using max-width to prevent low-res stretching */}
-              <div className="w-[92vw] max-w-[900px] mx-auto aspect-[16/9] relative overflow-hidden bg-transparent rounded-sm">
-                <AnimatePresence mode="sync">
-                  <motion.img
-                    key={currentImageIndex}
-                    src={HERO_IMAGES[currentImageIndex]}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1.5, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full object-contain"
-                    alt="Cinematic Hero"
-                  />
-                </AnimatePresence>
-              </div>
+              {/* STREAMING_CHUNK:Adding max-w to enforce side padding while maintaining vh height logic */}
+              {/* Master Container: Scales based on viewport height, maintaining 16:9 ratio, but never wider than 90vw */}
+              <div className="w-[92vw] md:w-auto md:h-[70vh] md:max-w-[90vw] aspect-[16/9] relative flex flex-col pointer-events-auto">
+                
+                {/* Image Frame */}
+                <div className="w-full h-full relative overflow-hidden bg-transparent rounded-sm">
+                  <AnimatePresence mode="sync">
+                    <motion.img
+                      key={currentImageIndex}
+                      src={HERO_IMAGES[currentImageIndex]}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 1.5, ease: "easeInOut" }}
+                      className="absolute inset-0 w-full h-full object-contain"
+                      alt="Cinematic Hero"
+                    />
+                  </AnimatePresence>
+                </div>
 
-              {/* STREAMING_CHUNK:Separating Pagination and Prev/Next to fix layout collisions */}
-              {/* Image Controls Container */}
-              <div className="w-[92vw] max-w-[900px] mx-auto mt-6 md:mt-8 flex justify-between items-center pointer-events-auto">
-                 
-                 {/* Left-aligned Previous Button */}
-                 <button 
-                   onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? HERO_IMAGES.length - 1 : prev - 1))}
-                   className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap ${
-                     theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-black'
-                   }`}
-                 >
-                   <span className="text-[10px] md:text-xs mb-[2px]">←</span>
-                   PREV
-                 </button>
+                {/* Controls - Pinned precisely below the image frame */}
+                <div className="w-full mt-4 md:mt-6 flex justify-between items-center relative">
+                   
+                   {/* Left-aligned Previous Button */}
+                   <button 
+                     onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? HERO_IMAGES.length - 1 : prev - 1))}
+                     className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap ${
+                       theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-black'
+                     }`}
+                   >
+                     <span className="text-[10px] md:text-xs mb-[2px]">←</span>
+                     PREV
+                   </button>
 
-                 {/* Center-aligned Numbers */}
-                 <div className="flex gap-2 md:gap-4 items-center absolute left-1/2 -translate-x-1/2">
-                    {getPagination(currentImageIndex, HERO_IMAGES.length).map((page, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => typeof page === 'number' && setCurrentImageIndex(page)}
-                        disabled={typeof page !== 'number'}
-                        className={`font-mono text-[11px] md:text-sm tracking-widest transition-colors duration-300 min-w-[24px] text-center ${
-                          page === currentImageIndex 
-                            ? (theme === 'dark' ? 'text-white font-bold' : 'text-black font-bold') 
-                            : typeof page === 'number' 
-                              ? (theme === 'dark' ? 'text-neutral-600 hover:text-white' : 'text-neutral-400 hover:text-black')
-                              : (theme === 'dark' ? 'text-neutral-700 cursor-default' : 'text-neutral-300 cursor-default')
-                        }`}
-                      >
-                        {typeof page === 'number' ? (page + 1).toString() : page}
-                      </button>
-                    ))}
-                 </div>
-                 
-                 {/* Right-aligned Next Button */}
-                 <button 
-                   onClick={() => setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length)}
-                   className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap ${
-                     theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-black'
-                   }`}
-                 >
-                   NEXT
-                   <span className="text-[10px] md:text-xs mb-[2px]">→</span>
-                 </button>
+                   {/* Center-aligned Numbers */}
+                   <div className="flex gap-2 md:gap-4 items-center absolute left-1/2 -translate-x-1/2">
+                      {getPagination(currentImageIndex, HERO_IMAGES.length).map((page, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => typeof page === 'number' && setCurrentImageIndex(page)}
+                          disabled={typeof page !== 'number'}
+                          className={`font-mono text-[11px] md:text-sm tracking-widest transition-colors duration-300 min-w-[24px] text-center ${
+                            page === currentImageIndex 
+                              ? (theme === 'dark' ? 'text-white font-bold' : 'text-black font-bold') 
+                              : typeof page === 'number' 
+                                ? (theme === 'dark' ? 'text-neutral-600 hover:text-white' : 'text-neutral-400 hover:text-black')
+                                : (theme === 'dark' ? 'text-neutral-700 cursor-default' : 'text-neutral-300 cursor-default')
+                          }`}
+                        >
+                          {typeof page === 'number' ? (page + 1).toString() : page}
+                        </button>
+                      ))}
+                   </div>
+                   
+                   {/* Right-aligned Next Button */}
+                   <button 
+                     onClick={() => setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length)}
+                     className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap ${
+                       theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-500 hover:text-black'
+                     }`}
+                   >
+                     NEXT
+                     <span className="text-[10px] md:text-xs mb-[2px]">→</span>
+                   </button>
+                </div>
               </div>
 
               {/* Floating Bottom Navigation Links */}
