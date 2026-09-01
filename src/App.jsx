@@ -166,12 +166,12 @@ const App = () => {
             {/* HERO SECTION */}
             <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center pt-[12vh] pb-[8vh]">
               
-              {/* STREAMING_CHUNK:Enforcing exact 94vw width for 3% left/right padding */}
-              {/* Master Container: 94vw width guarantees exactly 3vw (3%) padding on left and right */}
-              <div className="w-[94vw] aspect-[16/9] relative flex flex-col pointer-events-auto">
+              {/* STREAMING_CHUNK:Bulletproof responsive scaling logic for the hero image */}
+              {/* Master Container: Uses both vw and vh constraints so the image never overflows */}
+              <div className="w-[94vw] h-[65vh] md:h-[75vh] relative flex flex-col pointer-events-auto justify-center items-center">
                 
-                {/* Image Frame */}
-                <div className="w-full h-full relative overflow-hidden bg-transparent rounded-sm">
+                {/* Image Frame - Allows the image to naturally maintain 16:9 within the safe zone */}
+                <div className="w-full h-full relative flex justify-center items-center">
                   <AnimatePresence mode="sync">
                     <motion.img
                       key={currentImageIndex}
@@ -180,14 +180,14 @@ const App = () => {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 1.5, ease: "easeInOut" }}
-                      className="absolute inset-0 w-full h-full object-contain"
+                      className="absolute max-w-full max-h-full object-contain"
                       alt="Cinematic Hero"
                     />
                   </AnimatePresence>
                 </div>
 
-                {/* Controls - Pinned precisely below the image frame */}
-                <div className="w-full mt-4 md:mt-6 flex justify-between items-center relative">
+                {/* Controls - Pinned precisely below the dynamic image boundary */}
+                <div className="w-full mt-6 md:mt-8 flex justify-between items-center relative">
                    
                    {/* Left-aligned Previous Button */}
                    <button 
