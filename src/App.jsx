@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-/* STREAMING_CHUNK:Updating Hero Images with the new uniform aspect ratio .jpeg links */
 const HERO_IMAGES = [
   "https://static.wixstatic.com/media/548938_f62846ba164e46ef9c722e67b3ae2076~mv2.jpg",
   "https://static.wixstatic.com/media/548938_995acf11ce4d45b3a3f9138bee23e6c1~mv2.jpg",
@@ -58,11 +57,19 @@ const App = () => {
 
   useEffect(() => {
     setIsAppLoaded(true);
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 4500);
-    return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (activeView !== 'home') return;
+
+    // Keep every hero image on screen for 9 seconds.
+    // This timeout restarts after manual navigation so no slide changes early.
+    const timeout = setTimeout(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 9000);
+
+    return () => clearTimeout(timeout);
+  }, [currentImageIndex, activeView]);
 
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
@@ -83,7 +90,6 @@ const App = () => {
       nextSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  {/* STREAMING_CHUNK:Inlining Theme Toggle to fix React unmount bug */}
   return (
     <div className={`min-h-screen selection:bg-neutral-500/30 font-sans transition-colors duration-1000 ease-in-out ${theme === 'dark' ? 'bg-[#050505] text-[#ededed]' : 'bg-[#f4f4f4] text-[#111111]'}`}>
       
@@ -91,11 +97,12 @@ const App = () => {
       <header className={`fixed top-0 left-0 w-full z-50 px-[4vw] py-[4vh] flex justify-between items-start pointer-events-none transition-colors duration-1000 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         <div 
           onClick={() => { setActiveView('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }} 
-          className="flex flex-col cursor-pointer pointer-events-auto group w-fit"
+          className="flex flex-col items-center cursor-pointer pointer-events-auto group w-fit"
         >
-          <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2">
+          <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 text-center">
             <h1 className="font-sans text-[clamp(14px,1.5vw,18px)] tracking-widest uppercase font-semibold leading-none">Siddharth Srinivasan</h1>
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mt-2 opacity-70">DOP</p>
+            {/* Made DOP slightly larger and centered it properly */}
+            <p className="font-mono text-[12px] md:text-sm tracking-[0.4em] uppercase mt-2 opacity-80">DOP</p>
           </div>
         </div>
 
@@ -111,7 +118,6 @@ const App = () => {
              </div>
           </button>
           
-          {/* Natively inlined toggle - ensures React animates instead of remounting */}
           <button 
             onClick={toggleTheme}
             className={`relative flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'bg-[#222]' : 'bg-[#e5e5e5]'}`}
@@ -166,7 +172,6 @@ const App = () => {
             {/* HERO SECTION */}
             <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center pt-[12vh] pb-[8vh]">
               
-              {/* STREAMING_CHUNK:Bulletproof responsive scaling logic for the hero image */}
               {/* Master Container: Uses both vw and vh constraints so the image never overflows */}
               <div className="w-[94vw] h-[65vh] md:h-[75vh] relative flex flex-col pointer-events-auto justify-center items-center">
                 
@@ -179,7 +184,8 @@ const App = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 1.5, ease: "easeInOut" }}
+                      // Increased transition duration to 2.5s for a much slower, softer dissolve
+                      transition={{ duration: 2.5, ease: "easeInOut" }}
                       className="absolute max-w-full max-h-full object-contain"
                       alt="Cinematic Hero"
                     />
@@ -246,7 +252,8 @@ const App = () => {
                         onClick={() => { setActiveView('commercial'); window.scrollTo(0,0); }}
                     >
                         <div className="flex items-center gap-4">
-                            <span className={`font-mono text-[clamp(14px,2vw,20px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIAL</span>
+                            {/* Updated to "COMMERCIALS" */}
+                            <span className={`font-mono text-[clamp(14px,2vw,20px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIALS</span>
                         </div>
                         <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
                            <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
@@ -285,8 +292,9 @@ const App = () => {
                     <h2 className={`font-mono text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>About</h2>
                   </div>
                   <div className="md:col-span-8">
+                    {/* Removed "avant-garde" from about text */}
                     <h3 className="text-[clamp(1.5rem,2.5vw,3rem)] font-sans font-light leading-[1.3] tracking-wide">
-                      Siddharth Srinivasan is an avant-garde cinematographer crafting imagery that defies convention. Based in Mumbai, he works globally across commercial and narrative formats, exploring the quiet intersections of human emotion and cinematic restraint.
+                      Siddharth Srinivasan is a cinematographer crafting imagery that defies convention. Based in Mumbai, he works globally across commercial and narrative formats, exploring the quiet intersections of human emotion and cinematic restraint.
                     </h3>
                   </div>
                 </div>
@@ -407,8 +415,9 @@ const App = () => {
            <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-4 mb-32 w-full">
               <div className="col-span-1 md:col-span-3 flex flex-col">
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Profile</span>
+                  {/* Removed "avant-garde" from footer profile text */}
                   <p className={`font-mono text-[10px] md:text-xs tracking-[0.1em] uppercase leading-relaxed pr-8 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>
-                      Siddharth Srinivasan is an avant-garde cinematographer crafting imagery that defies convention, working globally across commercial and narrative formats.
+                      Siddharth Srinivasan is a cinematographer crafting imagery that defies convention, working globally across commercial and narrative formats.
                   </p>
               </div>
 
