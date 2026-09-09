@@ -145,49 +145,146 @@ const App = () => {
     }
   };
   
-  const scrollDown = () => {
-      nextSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }
-
   return (
-    <div className={`min-h-screen selection:bg-neutral-500/30 font-sans transition-colors duration-1000 ease-in-out ${theme === 'dark' ? 'bg-[#050505] text-[#ededed]' : 'bg-[#f4f4f4] text-[#111111]'}`}>
+    <div className={`siddharth-site min-h-screen overflow-x-clip selection:bg-neutral-500/30 font-sans transition-colors duration-1000 ease-in-out ${theme === 'dark' ? 'bg-[#050505] text-[#ededed]' : 'bg-[#f4f4f4] text-[#111111]'}`}>
+      <style>{`
+        :root {
+          --site-gutter: clamp(1rem, 4vw, 6rem);
+        }
+
+        html,
+        body,
+        #root {
+          min-width: 0;
+          overflow-x: clip;
+        }
+
+        .site-frame {
+          width: min(100%, 2400px);
+          margin-inline: auto;
+        }
+
+        .site-gutter {
+          padding-left: max(var(--site-gutter), env(safe-area-inset-left));
+          padding-right: max(var(--site-gutter), env(safe-area-inset-right));
+        }
+
+        .site-header {
+          padding-top: max(clamp(1rem, 3vh, 2.5rem), env(safe-area-inset-top));
+        }
+
+        .hero-section {
+          min-height: 100svh;
+          padding-top: clamp(6.75rem, 12vh, 10rem);
+          padding-bottom: max(clamp(2rem, 6vh, 5rem), env(safe-area-inset-bottom));
+        }
+
+        .hero-stage {
+          height: clamp(20rem, 68svh, 75rem);
+        }
+
+        .footer-wordmark {
+          font-size: clamp(2.25rem, 5.5vw, 7rem);
+        }
+
+        @media (max-width: 359px) {
+          :root {
+            --site-gutter: 0.75rem;
+          }
+
+          .brand-title {
+            max-width: 7rem;
+            font-size: 9px;
+            line-height: 1.15;
+          }
+
+          .header-nav-label {
+            font-size: 8px;
+            letter-spacing: 0.12em;
+          }
+
+          .hero-page-button:not([aria-current='true']) {
+            display: none;
+          }
+
+          .hero-stage {
+            height: 58svh;
+          }
+        }
+
+        @media (orientation: landscape) and (max-height: 600px) {
+          .site-header {
+            padding-top: max(0.75rem, env(safe-area-inset-top));
+          }
+
+          .hero-section {
+            min-height: 100dvh;
+            padding-top: 4.75rem;
+            padding-bottom: max(1rem, env(safe-area-inset-bottom));
+          }
+
+          .hero-stage {
+            height: 58dvh;
+            min-height: 13rem;
+          }
+
+          .hero-lower-nav {
+            margin-top: 0.75rem;
+          }
+        }
+
+        @media (min-width: 1800px) {
+          .hero-stage {
+            width: min(92vw, 2200px);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .siddharth-site *,
+          .siddharth-site *::before,
+          .siddharth-site *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+      `}</style>
       
       {/* Fixed Header */}
-      <header className={`fixed top-0 left-0 w-full z-50 px-[4vw] py-[4vh] flex justify-between items-start pointer-events-none transition-colors duration-1000 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+      <header className={`site-frame site-gutter site-header fixed top-0 left-1/2 -translate-x-1/2 w-full z-50 pb-4 sm:pb-6 flex justify-between items-start gap-3 pointer-events-none transition-colors duration-1000 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
         <div 
           onClick={() => { setActiveView('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }} 
-          className="flex flex-col items-center cursor-pointer pointer-events-auto group w-fit"
+          className="min-w-0 flex flex-col items-center cursor-pointer pointer-events-auto group w-fit"
         >
           <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 text-center">
-            <h1 className="font-sans text-[clamp(14px,1.5vw,18px)] tracking-widest uppercase font-semibold leading-none">Siddharth Srinivasan</h1>
-            {/* Made DOP slightly larger and centered it properly */}
-            <p className="font-mono text-[12px] md:text-sm tracking-[0.4em] uppercase mt-2 opacity-80">DOP</p>
+            <h1 className="brand-title font-sans text-[clamp(10px,1.5vw,18px)] tracking-[0.12em] sm:tracking-widest uppercase font-semibold leading-none whitespace-normal sm:whitespace-nowrap">Siddharth Srinivasan</h1>
+            <p className="font-mono text-[8px] sm:text-[10px] md:text-sm tracking-[0.3em] sm:tracking-[0.4em] uppercase mt-1.5 sm:mt-2 opacity-80">DOP</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-6 md:gap-12 pointer-events-auto">
-          <button onClick={scrollToAbout} className="group cursor-pointer w-fit overflow-hidden py-2">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-6 lg:gap-12 pointer-events-auto">
+          <button onClick={scrollToAbout} className="group cursor-pointer w-fit overflow-hidden py-2 px-1">
              <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4">
-               <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">ABOUT</span>
+               <span className="header-nav-label font-mono text-[9px] sm:text-[10px] md:text-xs tracking-[0.16em] sm:tracking-[0.2em] uppercase">ABOUT</span>
              </div>
           </button>
-          <button onClick={scrollToFooter} className="group cursor-pointer w-fit overflow-hidden py-2">
+          <button onClick={scrollToFooter} className="group cursor-pointer w-fit overflow-hidden py-2 px-1">
              <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4">
-               <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase">CONTACT</span>
+               <span className="header-nav-label font-mono text-[9px] sm:text-[10px] md:text-xs tracking-[0.16em] sm:tracking-[0.2em] uppercase">CONTACT</span>
              </div>
           </button>
           
           <button 
             onClick={toggleTheme}
-            className={`relative flex items-center w-14 h-7 rounded-full p-1 transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'bg-[#222]' : 'bg-[#e5e5e5]'}`}
+            className={`relative flex shrink-0 items-center w-12 h-6 sm:w-14 sm:h-7 rounded-full p-1 transition-colors duration-500 ease-in-out ${theme === 'dark' ? 'bg-[#222]' : 'bg-[#e5e5e5]'}`}
             aria-label="Toggle Theme"
+            aria-pressed={theme === 'dark'}
           >
             <div 
-              className="w-5 h-5 rounded-full flex items-center justify-center absolute shadow-sm overflow-hidden transition-all duration-700 ease-[0.19,1,0.22,1]"
-              style={{
-                  transform: `translateX(${theme === 'dark' ? '28px' : '0px'}) rotate(${theme === 'dark' ? '360deg' : '0deg'})`,
-                  backgroundColor: theme === 'dark' ? 'black' : 'white'
-              }}
+              className={`absolute left-1 top-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shadow-sm overflow-hidden transition-all duration-700 ease-[0.19,1,0.22,1] ${
+                theme === 'dark' ? 'translate-x-6 sm:translate-x-7 rotate-[360deg] bg-black' : 'translate-x-0 rotate-0 bg-white'
+              }`}
             >
               {/* Light Mode Icon (f/2.8) */}
               <svg className={`absolute w-3 h-3 text-black transition-opacity duration-500 ease-in-out ${theme === 'dark' ? 'opacity-0' : 'opacity-100'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
@@ -229,13 +326,12 @@ const App = () => {
             transition={{ duration: 0.8 }}
           >
             {/* HERO SECTION */}
-            <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center pt-[12vh] pb-[8vh]">
+            <section className="site-frame hero-section relative w-full flex flex-col items-center justify-center">
               
-              {/* Master Container: Uses both vw and vh constraints so the image never overflows */}
-              <div className="w-[94vw] h-[65vh] md:h-[75vh] relative flex flex-col pointer-events-auto justify-center items-center">
+              {/* Viewport-aware stage: contained on phones, tablets and ultra-wide screens. */}
+              <div className="hero-stage w-[calc(100%_-_2rem)] sm:w-[94vw] max-w-[2200px] min-h-0 relative flex flex-col pointer-events-auto justify-center items-center">
                 
-                {/* Image Frame - Allows the image to naturally maintain 16:9 within the safe zone */}
-                <div className="w-full h-full relative flex justify-center items-center">
+                <div className="w-full min-h-0 flex-1 relative flex justify-center items-center overflow-hidden">
                   <AnimatePresence mode="sync">
                     <motion.img
                       key={currentImageIndex}
@@ -245,37 +341,36 @@ const App = () => {
                       exit={{ opacity: 0 }}
                       // Increased transition duration to 2.5s for a much slower, softer dissolve
                       transition={{ duration: 2.5, ease: "easeInOut" }}
-                      className="absolute max-w-full max-h-full object-contain"
-                      alt="Cinematic Hero"
+                      className="absolute w-full h-full object-contain"
+                      alt={`Cinematic still ${currentImageIndex + 1} of ${HERO_IMAGES.length}`}
                     />
                   </AnimatePresence>
                 </div>
 
-                {/* Controls - Pinned precisely below the dynamic image boundary */}
-                <div className="w-full mt-6 md:mt-8 flex justify-between items-center relative">
+                <div className="w-full mt-4 sm:mt-6 lg:mt-8 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 sm:gap-4">
                    
                    {/* Left-aligned Previous Button */}
                    <button 
                      onClick={() => setCurrentImageIndex((prev) => Math.max(prev - 1, 0))}
                      disabled={currentImageIndex === 0}
                      aria-label="Show previous image"
-                     className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap disabled:opacity-25 disabled:cursor-not-allowed ${
+                     className={`font-mono text-[10px] md:text-xs tracking-[0.16em] sm:tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap disabled:opacity-25 disabled:cursor-not-allowed ${
                        theme === 'dark' ? 'text-neutral-400 enabled:hover:text-white' : 'text-neutral-500 enabled:hover:text-black'
                      }`}
                    >
                      <span className="text-[10px] md:text-xs mb-[2px]">←</span>
-                     PREV
+                     <span className="hidden sm:inline">PREV</span>
                    </button>
 
                    {/* Center-aligned Numbers */}
-                   <div className="flex gap-2 md:gap-4 items-center absolute left-1/2 -translate-x-1/2">
+                   <div className="min-w-0 flex justify-center gap-1 sm:gap-2 md:gap-4 items-center">
                       {getPagination(currentImageIndex, HERO_IMAGES.length).map((page, idx) => (
                         <button
                           key={idx}
                           onClick={() => setCurrentImageIndex(page)}
                           aria-label={`Show image ${page + 1}`}
                           aria-current={page === currentImageIndex ? 'true' : undefined}
-                          className={`font-mono text-[11px] md:text-sm tracking-widest transition-colors duration-300 min-w-[24px] text-center ${
+                          className={`hero-page-button font-mono text-[10px] sm:text-[11px] md:text-sm tracking-widest transition-colors duration-300 min-w-[20px] sm:min-w-[24px] text-center ${
                             page === currentImageIndex 
                               ? (theme === 'dark' ? 'text-white font-bold' : 'text-black font-bold') 
                               : (theme === 'dark' ? 'text-neutral-600 hover:text-white' : 'text-neutral-400 hover:text-black')
@@ -291,18 +386,18 @@ const App = () => {
                      onClick={() => setCurrentImageIndex((prev) => Math.min(prev + 1, HERO_IMAGES.length - 1))}
                      disabled={currentImageIndex === HERO_IMAGES.length - 1}
                      aria-label="Show next image"
-                     className={`font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-2 whitespace-nowrap disabled:opacity-25 disabled:cursor-not-allowed ${
+                     className={`font-mono text-[10px] md:text-xs tracking-[0.16em] sm:tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap disabled:opacity-25 disabled:cursor-not-allowed ${
                        theme === 'dark' ? 'text-neutral-400 enabled:hover:text-white' : 'text-neutral-500 enabled:hover:text-black'
                      }`}
                    >
-                     NEXT
+                     <span className="hidden sm:inline">NEXT</span>
                      <span className="text-[10px] md:text-xs mb-[2px]">→</span>
                    </button>
                 </div>
               </div>
 
-              {/* Floating Bottom Navigation Links */}
-              <div className="absolute bottom-6 left-0 w-full px-[4vw] flex justify-between items-end pointer-events-none z-40">
+              {/* Normal-flow positioning prevents overlap on short landscape screens. */}
+              <div className="site-gutter hero-lower-nav w-full mt-8 sm:mt-10 flex justify-between items-end gap-4 pointer-events-none z-40">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={isAppLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -315,7 +410,7 @@ const App = () => {
                     >
                         <div className="flex items-center gap-4">
                             {/* Updated to "COMMERCIALS" */}
-                            <span className={`font-mono text-[clamp(14px,2vw,20px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIALS</span>
+                            <span className={`font-mono text-[clamp(11px,2vw,20px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIALS</span>
                         </div>
                         <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
                            <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
@@ -334,7 +429,7 @@ const App = () => {
                         onClick={() => { setActiveView('narratives'); window.scrollTo(0,0); }}
                     >
                         <div className="flex items-center gap-4">
-                            <span className={`font-mono text-[clamp(14px,2vw,20px)] tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:-translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
+                            <span className={`font-mono text-[clamp(11px,2vw,20px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:-translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
                         </div>
                         <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
                            <div className={`absolute inset-0 origin-right scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
@@ -344,18 +439,17 @@ const App = () => {
               </div>
             </section>
 
-            <section ref={nextSectionRef} className="relative z-30 w-full pt-16 md:pt-32">
+            <section ref={nextSectionRef} className="site-frame relative z-30 w-full pt-12 sm:pt-20 lg:pt-32">
               
               {/* ABOUT SECTION */}
-              <div ref={aboutRef} className="w-full px-[4vw] pt-8 pb-32 md:pb-48">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
-                  <div className="md:col-span-4 flex items-center gap-4">
+              <div ref={aboutRef} className="site-gutter w-full pt-6 sm:pt-8 pb-20 sm:pb-28 lg:pb-48 scroll-mt-24">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-start">
+                  <div className="lg:col-span-4 flex items-center gap-3 sm:gap-4">
                     <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
-                    <h2 className={`font-mono text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>About</h2>
+                    <h2 className={`font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>About</h2>
                   </div>
-                  <div className="md:col-span-8">
-                    {/* Removed "avant-garde" from about text */}
-                    <h3 className="text-[clamp(1.5rem,2.5vw,3rem)] font-sans font-light leading-[1.3] tracking-wide">
+                  <div className="lg:col-span-8">
+                    <h3 className="max-w-6xl text-[clamp(1.25rem,2.5vw,3rem)] font-sans font-light leading-[1.3] tracking-wide">
                       Siddharth Srinivasan is a cinematographer crafting imagery that defies convention. Based in Mumbai, he works globally across commercial and narrative formats, exploring the quiet intersections of human emotion and cinematic restraint.
                     </h3>
                   </div>
@@ -363,12 +457,12 @@ const App = () => {
               </div>
 
               {/* SELECTED WORKS GRID */}
-              <div className="w-full px-[4vw] pb-32">
-                <div className={`flex justify-between items-end border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
-                  <h2 className={`font-mono text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>Selected Work</h2>
+              <div className="site-gutter w-full pb-20 sm:pb-28 lg:pb-32">
+                <div className={`flex justify-between items-end gap-4 border-b pb-4 sm:pb-6 mb-10 sm:mb-14 lg:mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
+                  <h2 className={`font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>Selected Work</h2>
                   <span className={`font-mono text-[10px] tracking-widest ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>03 / {SELECTED_WORK.length.toString().padStart(2, '0')}</span>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-32 gap-x-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-14 sm:gap-y-20 lg:gap-y-32 gap-x-6 lg:gap-x-12">
                   {SELECTED_WORK.map((project, i) => (
                     <motion.a 
                       key={project.id} 
@@ -376,18 +470,18 @@ const App = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Watch ${project.title} on Vimeo`}
-                      className={`flex flex-col group cursor-pointer ${i % 2 !== 0 ? 'md:mt-32' : ''}`}
+                      className={`min-w-0 flex flex-col group cursor-pointer ${i % 2 !== 0 ? 'md:mt-20 lg:mt-32' : ''}`}
                       initial={{ y: 100, opacity: 0 }}
                       whileInView={{ y: 0, opacity: 1 }}
                       viewport={{ once: true, amount: 0.1 }}
                       transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
                     >
-                      <div className={`w-full aspect-[4/3] overflow-hidden mb-6 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
+                      <div className={`w-full aspect-[4/3] overflow-hidden mb-4 sm:mb-6 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
                         <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-1000 ease-[0.19,1,0.22,1] group-hover:scale-105" />
                       </div>
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="text-2xl md:text-3xl font-sans uppercase font-light tracking-wide mb-2">{project.title}</h3>
+                      <div className="min-w-0 flex justify-between items-start gap-4">
+                        <div className="min-w-0">
+                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-sans uppercase font-light tracking-wide leading-tight mb-2 break-words">{project.title}</h3>
                           <p className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{project.type}</p>
                         </div>
                         <span className={`font-mono text-[10px] tracking-widest ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>{project.year}</span>
@@ -408,13 +502,13 @@ const App = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            className="pt-40 px-[4vw] min-h-screen pb-32"
+            className="site-frame site-gutter pt-28 sm:pt-32 lg:pt-40 min-h-[100svh] pb-20 sm:pb-28 lg:pb-32"
           >
-            <div className={`border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
+            <div className={`border-b pb-4 sm:pb-6 mb-10 sm:mb-14 lg:mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
                 <h2 className="font-mono text-xs tracking-[0.3em] uppercase opacity-50">COMMERCIALS</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-24 gap-x-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-14 sm:gap-y-20 lg:gap-y-24 gap-x-5 md:gap-x-8 lg:gap-x-12">
               <AnimatePresence mode="popLayout">
                 {COMMERCIAL_WORK.map((work) => (
                   <motion.a
@@ -428,13 +522,13 @@ const App = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.5 }}
-                    className="w-full flex flex-col group cursor-pointer"
+                    className="min-w-0 w-full flex flex-col group cursor-pointer"
                   >
                     <div className={`w-full aspect-video overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
                        <img src={work.image} alt={work.title} className="w-full h-full object-cover transition-transform duration-1000 ease-[0.19,1,0.22,1] group-hover:scale-105" />
                     </div>
-                    <div className="flex justify-between items-start mt-6">
-                       <h3 className="text-2xl md:text-3xl font-sans uppercase font-light tracking-wide">{work.title}</h3>
+                    <div className="min-w-0 flex flex-col lg:flex-row lg:justify-between lg:items-start gap-2 lg:gap-4 mt-4 sm:mt-6">
+                       <h3 className="min-w-0 text-xl sm:text-2xl lg:text-3xl font-sans uppercase font-light tracking-wide leading-tight break-words">{work.title}</h3>
                        <span className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{work.category}</span>
                     </div>
                   </motion.a>
@@ -452,13 +546,13 @@ const App = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-            className={`pt-40 px-[4vw] min-h-screen pb-32 relative z-30 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}
+            className={`site-frame site-gutter pt-28 sm:pt-32 lg:pt-40 min-h-[100svh] pb-20 sm:pb-28 lg:pb-32 relative z-30 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}
           >
-            <div className={`border-b pb-6 mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
+            <div className={`border-b pb-4 sm:pb-6 mb-10 sm:mb-14 lg:mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
                 <h2 className="font-mono text-xs tracking-[0.3em] uppercase opacity-50">NARRATIVES</h2>
             </div>
             
-            <div className="flex flex-col gap-32">
+            <div className="flex flex-col gap-16 sm:gap-24 lg:gap-32">
               {NARRATIVE_WORK.map((work) => (
                  <motion.a
                     key={work.id}
@@ -466,17 +560,17 @@ const App = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Watch ${work.title} on Vimeo`}
-                    className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center group"
+                    className="min-w-0 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-center group"
                     initial={{ y: 60, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true, amount: 0.15 }}
                     transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
                  >
-                    <div className={`md:col-span-5 aspect-[3/4] overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
+                    <div className={`lg:col-span-5 aspect-video lg:aspect-[3/4] overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
                        <img src={work.poster} alt={work.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                     </div>
-                    <div className="md:col-span-7 flex flex-col max-w-xl">
-                       <h3 className="text-[clamp(2rem,3vw,4rem)] font-sans uppercase font-light tracking-tight leading-none mb-6">{work.title}</h3>
+                    <div className="lg:col-span-7 min-w-0 flex flex-col max-w-2xl">
+                       <h3 className="text-[clamp(1.75rem,3vw,4rem)] font-sans uppercase font-light tracking-tight leading-none mb-4 sm:mb-6 break-words">{work.title}</h3>
                        <p className={`font-mono text-xs md:text-sm tracking-wide leading-relaxed uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>
                          {work.info}
                        </p>
@@ -492,45 +586,44 @@ const App = () => {
       <div className={`relative z-40 w-full flex flex-col transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#050505]' : 'bg-[#f4f4f4]'}`}>
         
         {/* TYPOGRAPHIC EDITORIAL FOOTER */}
-        <footer ref={footerRef} className={`relative w-full pt-32 pb-8 px-[4vw] flex flex-col justify-between overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-4 mb-32 w-full">
-              <div className="col-span-1 md:col-span-3 flex flex-col">
-                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Profile</span>
-                  {/* Removed "avant-garde" from footer profile text */}
-                  <p className={`font-mono text-[10px] md:text-xs tracking-[0.1em] uppercase leading-relaxed pr-8 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>
+        <footer ref={footerRef} className={`site-frame site-gutter relative w-full pt-20 sm:pt-24 lg:pt-32 pb-6 sm:pb-8 flex flex-col justify-between overflow-hidden transition-colors duration-1000 scroll-mt-20 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-10 sm:gap-12 xl:gap-6 mb-16 sm:mb-24 lg:mb-28 w-full">
+              <div className="sm:col-span-1 xl:col-span-3 min-w-0 flex flex-col">
+                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Profile</span>
+                  <p className={`max-w-md font-mono text-[10px] md:text-xs tracking-[0.08em] sm:tracking-[0.1em] uppercase leading-relaxed xl:pr-6 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>
                       Siddharth Srinivasan is a cinematographer crafting imagery that defies convention, working globally across commercial and narrative formats.
                   </p>
               </div>
 
-              <div className="col-span-1 md:col-span-4 flex flex-col">
-                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Direct Inquiries</span>
-                  <a href="mailto:hello@siddharth.com" className={`text-[clamp(1.5rem,2.5vw,3rem)] font-sans font-light uppercase leading-[1.1] hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>HELLO@<br/>SIDDHARTH.COM</a>
-                  <a href="tel:+919876543210" className={`text-[clamp(1.5rem,2.5vw,3rem)] font-sans font-light uppercase leading-none hover:italic transition-all duration-300 mt-6 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>+91 98765 43210</a>
+              <div className="sm:col-span-1 xl:col-span-4 min-w-0 flex flex-col">
+                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Direct Inquiries</span>
+                  <a href="mailto:hello@siddharth.com" className={`max-w-full text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1] break-words hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>HELLO@SIDDHARTH.COM</a>
+                  <a href="tel:+919876543210" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none whitespace-nowrap hover:italic transition-all duration-300 mt-4 sm:mt-6 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>+91 98765 43210</a>
               </div>
 
-              <div className="col-span-1 md:col-span-3 flex flex-col">
-                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Network</span>
-                  <a href={VIMEO_PROFILE} target="_blank" rel="noopener noreferrer" className={`text-[clamp(1.5rem,2.5vw,3rem)] font-sans font-light uppercase leading-[1.1] hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>VIMEO</a>
-                  <a href="#" className={`text-[clamp(1.5rem,2.5vw,3rem)] font-sans font-light uppercase leading-none hover:italic transition-all duration-300 mt-6 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>INSTAGRAM</a>
+              <div className="sm:col-span-1 xl:col-span-3 min-w-0 flex flex-col">
+                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Network</span>
+                  <a href={VIMEO_PROFILE} target="_blank" rel="noopener noreferrer" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1] hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>VIMEO</a>
+                  <a href="#" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none hover:italic transition-all duration-300 mt-4 sm:mt-6 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>INSTAGRAM</a>
               </div>
 
-              <div className="col-span-1 md:col-span-2 flex flex-col md:items-end text-left md:text-right">
-                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Base</span>
-                  <p className="text-[clamp(1.5rem,2.5vw,3rem)] font-sans font-light uppercase leading-[1.1]">MUMBAI</p>
-                  <p className={`text-[clamp(1.5rem,2.5vw,3rem)] font-sans font-light uppercase leading-none mt-2 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>INDIA</p>
-                  <div className="mt-8 flex items-center gap-2">
+              <div className="sm:col-span-1 xl:col-span-2 min-w-0 flex flex-col xl:items-end text-left xl:text-right">
+                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Base</span>
+                  <p className="text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1]">MUMBAI</p>
+                  <p className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none mt-2 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>INDIA</p>
+                  <div className="mt-5 sm:mt-8 flex items-center gap-2">
                      <div className={`w-2 h-2 rounded-full animate-pulse ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
                      <span className={`font-mono text-[9px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>Available Worldwide</span>
                   </div>
               </div>
            </div>
 
-           <div className={`w-full flex justify-center items-end border-t pt-8 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-300'}`}>
-              <h1 className="text-[clamp(3.75rem,9vw,9rem)] font-sans font-light tracking-tighter uppercase leading-[0.85] whitespace-nowrap">SIDDHARTH</h1>
+           <div className={`w-full flex justify-center items-end border-t pt-6 sm:pt-8 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-300'}`}>
+              <h1 className="footer-wordmark max-w-full text-center font-sans font-light tracking-[-0.055em] uppercase leading-[0.9] whitespace-nowrap">SIDDHARTH</h1>
            </div>
-           <div className="w-full flex justify-between items-center mt-6">
+           <div className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-6 mt-5 sm:mt-6 pb-[env(safe-area-inset-bottom)]">
                <span className={`font-mono text-[9px] tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>© {new Date().getFullYear()}</span>
-               <span className={`font-mono text-[9px] tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>ALL RIGHTS RESERVED</span>
+               <span className={`font-mono text-[9px] tracking-[0.2em] sm:tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>ALL RIGHTS RESERVED</span>
            </div>
         </footer>
       </div>
