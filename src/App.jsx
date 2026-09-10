@@ -183,8 +183,8 @@ const App = () => {
           height: clamp(20rem, 68svh, 75rem);
         }
 
-        .footer-wordmark {
-          font-size: clamp(2.25rem, 5.5vw, 7rem);
+        .footer-signature {
+          font-size: clamp(1rem, 2vw, 2rem);
         }
 
         @media (max-width: 359px) {
@@ -370,7 +370,7 @@ const App = () => {
                           onClick={() => setCurrentImageIndex(page)}
                           aria-label={`Show image ${page + 1}`}
                           aria-current={page === currentImageIndex ? 'true' : undefined}
-                          className={`hero-page-button font-mono text-[10px] sm:text-[11px] md:text-sm tracking-widest transition-colors duration-300 min-w-[20px] sm:min-w-[24px] text-center ${
+                          className={`hero-page-button font-mono text-sm md:text-base tracking-widest transition-colors duration-300 min-w-[24px] sm:min-w-[28px] text-center ${
                             page === currentImageIndex 
                               ? (theme === 'dark' ? 'text-white font-bold' : 'text-black font-bold') 
                               : (theme === 'dark' ? 'text-neutral-600 hover:text-white' : 'text-neutral-400 hover:text-black')
@@ -406,11 +406,10 @@ const App = () => {
                   >
                     <div 
                         className="flex flex-col cursor-pointer group w-fit"
-                        onClick={() => { setActiveView('commercial'); window.scrollTo(0,0); }}
+                        onClick={() => { setActiveView('narratives'); window.scrollTo(0,0); }}
                     >
                         <div className="flex items-center gap-4">
-                            {/* Updated to "COMMERCIALS" */}
-                            <span className={`font-mono text-[clamp(11px,2vw,20px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIALS</span>
+                            <span className={`font-mono text-[clamp(13px,2vw,22px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
                         </div>
                         <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
                            <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
@@ -426,10 +425,10 @@ const App = () => {
                   >
                      <div 
                         className="flex flex-col items-end cursor-pointer group w-fit"
-                        onClick={() => { setActiveView('narratives'); window.scrollTo(0,0); }}
+                        onClick={() => { setActiveView('commercial'); window.scrollTo(0,0); }}
                     >
                         <div className="flex items-center gap-4">
-                            <span className={`font-mono text-[clamp(11px,2vw,20px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:-translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
+                            <span className={`font-mono text-[clamp(13px,2vw,22px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:-translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIALS</span>
                         </div>
                         <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
                            <div className={`absolute inset-0 origin-right scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
@@ -618,12 +617,12 @@ const App = () => {
               </div>
            </div>
 
-           <div className={`w-full flex justify-center items-end border-t pt-6 sm:pt-8 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-300'}`}>
-              <h1 className="footer-wordmark max-w-full text-center font-sans font-light tracking-[-0.055em] uppercase leading-[0.9] whitespace-nowrap">SIDDHARTH</h1>
-           </div>
-           <div className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-6 mt-5 sm:mt-6 pb-[env(safe-area-inset-bottom)]">
-               <span className={`font-mono text-[9px] tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>© {new Date().getFullYear()}</span>
-               <span className={`font-mono text-[9px] tracking-[0.2em] sm:tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>ALL RIGHTS RESERVED</span>
+           <div className={`w-full flex justify-between items-end gap-6 border-t pt-6 sm:pt-8 pb-[env(safe-area-inset-bottom)] transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-300'}`}>
+               <div className="min-w-0 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+                 <span className={`font-mono text-[9px] tracking-[0.3em] uppercase whitespace-nowrap ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>© {new Date().getFullYear()}</span>
+                 <span className={`font-mono text-[9px] tracking-[0.16em] sm:tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>ALL RIGHTS RESERVED</span>
+               </div>
+               <h1 className={`footer-signature shrink-0 text-right font-sans font-light tracking-[0.04em] uppercase leading-none whitespace-nowrap ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>SIDDHARTH</h1>
            </div>
         </footer>
       </div>
