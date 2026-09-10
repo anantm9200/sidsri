@@ -63,10 +63,11 @@ const NARRATIVE_WORK = [
   {
     id: 2,
     title: 'GUILTY MINDS',
-    info: 'AMAZON PRIME | SERIES TRAILER',
+    info: 'AMAZON PRIME | SERIES',
     poster: 'https://i.vimeocdn.com/video/2157761084-c2f60fd7c587780f435c296d53c045b9cfddced4366831012a8fe7ff1bd0c0e2-d_1280x720?&r=pad&region=us',
     videos: [
       { label: 'TRAILER', link: 'https://vimeo.com/1076651680' },
+      { label: 'OPENING TITLE', link: 'https://vimeo.com/823623520' },
     ],
   },
 ];
