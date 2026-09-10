@@ -53,16 +53,21 @@ const NARRATIVE_WORK = [
   {
     id: 1,
     title: 'KAALA',
-    info: 'HOTSTAR | WEBSERIES TEASER',
+    info: 'HOTSTAR | WEBSERIES',
     poster: 'https://i.vimeocdn.com/video/1739105513-07073d98c87993ef1f14236f4c23a6aca90335e583316bbe1904a8f7d072d253-d_1280x720?&r=pad&region=us',
-    link: 'https://vimeo.com/874827009',
+    videos: [
+      { label: 'TEASER', link: 'https://vimeo.com/874827009' },
+      { label: 'TRAILER', link: 'https://vimeo.com/874840844' },
+    ],
   },
   {
     id: 2,
     title: 'GUILTY MINDS',
     info: 'AMAZON PRIME | SERIES TRAILER',
     poster: 'https://i.vimeocdn.com/video/2157761084-c2f60fd7c587780f435c296d53c045b9cfddced4366831012a8fe7ff1bd0c0e2-d_1280x720?&r=pad&region=us',
-    link: 'https://vimeo.com/1076651680',
+    videos: [
+      { label: 'TRAILER', link: 'https://vimeo.com/1076651680' },
+    ],
   },
 ];
 
@@ -553,20 +558,32 @@ const App = () => {
             
             <div className="flex flex-col gap-16 sm:gap-24 lg:gap-32">
               {NARRATIVE_WORK.map((work) => (
-                 <motion.a
+                 <motion.div
                     key={work.id}
-                    href={work.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Watch ${work.title} on Vimeo`}
                     className="min-w-0 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-center group"
                     initial={{ y: 60, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true, amount: 0.15 }}
                     transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
                  >
-                    <div className={`lg:col-span-5 aspect-video lg:aspect-[3/4] overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
+                    <div className={`relative lg:col-span-5 aspect-video lg:aspect-[3/4] overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
                        <img src={work.poster} alt={work.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
+                       <div className="absolute inset-x-3 sm:inset-x-4 bottom-3 sm:bottom-4 z-10 flex gap-2 sm:gap-3">
+                         {work.videos.map((video) => (
+                           <a
+                             key={video.label}
+                             href={video.link}
+                             target="_blank"
+                             rel="noopener noreferrer"
+                             aria-label={`Watch ${work.title} ${video.label.toLowerCase()} on Vimeo`}
+                             className="min-w-0 flex-1 sm:flex-none flex items-center justify-between gap-4 border border-white/35 bg-black/55 backdrop-blur-md px-3 sm:px-4 py-2.5 sm:py-3 text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                           >
+                             <span className="font-mono text-[11px] sm:text-xs tracking-[0.18em] uppercase">{video.label}</span>
+                             <span aria-hidden="true" className="font-mono text-xs">↗</span>
+                           </a>
+                         ))}
+                       </div>
                     </div>
                     <div className="lg:col-span-7 min-w-0 flex flex-col max-w-2xl">
                        <h3 className="text-[clamp(1.75rem,3vw,4rem)] font-sans uppercase font-light tracking-tight leading-none mb-4 sm:mb-6 break-words">{work.title}</h3>
@@ -574,7 +591,7 @@ const App = () => {
                          {work.info}
                        </p>
                     </div>
-                 </motion.a>
+                 </motion.div>
               ))}
             </div>
           </motion.div>
