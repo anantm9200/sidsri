@@ -25,11 +25,11 @@ const VIMEO_PROFILE = 'https://vimeo.com/siddharthdop';
 const SELECTED_WORK = [
   {
     id: '01',
-    title: 'KAALA TRAILER',
+    title: 'KAALA TEASER',
     year: '2023',
     type: 'WEBSERIES',
-    image: 'https://i.vimeocdn.com/video/2157760051-1d42c761e02d837191c4c011e9474b278ffbf80fe14c91c264fae945ecb5e05c-d_1280x720?&r=pad&region=us',
-    link: 'https://vimeo.com/874840844',
+    image: 'https://i.vimeocdn.com/video/1739105513-07073d98c87993ef1f14236f4c23a6aca90335e583316bbe1904a8f7d072d253-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/874827009',
   },
   {
     id: '02',
@@ -41,11 +41,83 @@ const SELECTED_WORK = [
   },
   {
     id: '03',
-    title: 'SBI X R ASHWIN',
+    title: 'ORALAND X SKY',
+    year: '2026',
+    type: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2170653403-84eeea23fd2d8be3dc278abfcac15edfad3d352f622b8b28f3076307faeb5473-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1202805509',
+  },
+  {
+    id: '04',
+    title: 'ASIA CUP X HARMANPREET KAUR',
+    year: '2026',
+    type: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2199295186-0b260aeb2fcb5ebedc25df02ca1e66ea3200d35d60d90538c0091a12072aaeb6-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1225544749',
+  },
+  {
+    id: '05',
+    title: 'SONY SPORTS — RAKESH BEDI',
+    year: '2026',
+    type: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2167617865-d6b4b183cb7a204692d40356c570a47d4162c448de3705e68ab90157a4312c75-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1200507675',
+  },
+  {
+    id: '06',
+    title: 'VIVO V27',
+    year: '2023',
+    type: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1670231235-e01965db7936054cd433c502188f372e04afc45c52b730aa02d20e86499ffe0c-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/810797934',
+  },
+  {
+    id: '07',
+    title: 'PERFECT JUSTICE',
+    year: '2019',
+    type: 'FEATURE FILM',
+    image: 'https://i.vimeocdn.com/video/2190890551-73ee2d7719500a4ac1f24235e5165e6f26ec0f6e14ec28c04b8b69e032a75772-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/309167152',
+  },
+  {
+    id: '08',
+    title: 'PAATAL LOK PROMO X JAIDEEP AHLAWAT',
     year: '2025',
     type: 'COMMERCIAL',
-    image: 'https://i.vimeocdn.com/video/2073749699-293d89dc66bcc482a9b7d878b2a490097059ef54864b4b4fd585feb96f2c0fbc-d_1280x720?&r=pad&region=us',
-    link: 'https://vimeo.com/1130153129',
+    image: 'https://i.vimeocdn.com/video/2030567140-abfddb4fb0795741924b1159ade035378f1d6a318986f492e9895e963b88e9f2-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1046320358',
+  },
+  {
+    id: '09',
+    title: 'VIVO V50',
+    year: '2025',
+    type: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1985808395-d239c3e4048ba9119ef969c823a2479f92bab1f95b8fee960b8c740490ee2b45-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1059452766',
+  },
+  {
+    id: '10',
+    title: 'DISCOVERY',
+    year: '2023',
+    type: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1637879798-d18277d49527a99a8ffbc2a1221740124d71ef9afe9918e07da3427f101a6176-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/810437793',
+  },
+  {
+    id: '11',
+    title: 'LAZY DAY X MILIND SOMAN',
+    year: '2025',
+    type: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2050737179-6a2805ff04b45edfeeca63229f22c5f8e50381d7ffccdfc36ecfca71d639da62-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1112487367',
+  },
+  {
+    id: '12',
+    title: 'OPPO N3 FLIP X SIDDHANTH AND JACKIE',
+    year: '2023',
+    type: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2015191516-21f776e61014f4c5d2dd35c1ad79e2a69c0641633e71c5b7ff860682f020e6cc-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/882346836',
   },
 ];
 
@@ -62,12 +134,39 @@ const NARRATIVE_WORK = [
   },
   {
     id: 2,
+    title: 'DUET',
+    info: 'SHORT FILM',
+    poster: 'https://i.vimeocdn.com/video/2183812349-79b371485af04b26078db91c7de4eb4f22468ac342bd837df1d789e91b2644cb-d_1280x720?&r=pad&region=us',
+    videos: [
+      { label: 'TRAILER', link: 'https://vimeo.com/1213203318' },
+    ],
+  },
+  {
+    id: 3,
+    title: 'PERFECT JUSTICE',
+    info: 'TAIWANESE | FEATURE FILM',
+    poster: 'https://i.vimeocdn.com/video/2190890551-73ee2d7719500a4ac1f24235e5165e6f26ec0f6e14ec28c04b8b69e032a75772-d_1280x720?&r=pad&region=us',
+    videos: [
+      { label: 'WATCH', link: 'https://vimeo.com/309167152' },
+    ],
+  },
+  {
+    id: 4,
     title: 'GUILTY MINDS',
     info: 'AMAZON PRIME | SERIES',
     poster: 'https://i.vimeocdn.com/video/2157761084-c2f60fd7c587780f435c296d53c045b9cfddced4366831012a8fe7ff1bd0c0e2-d_1280x720?&r=pad&region=us',
     videos: [
       { label: 'TRAILER', link: 'https://vimeo.com/1076651680' },
       { label: 'OPENING TITLE', link: 'https://vimeo.com/823623520' },
+    ],
+  },
+  {
+    id: 5,
+    title: 'AVE MARIA',
+    info: 'SHORT FILM | FIRST LOOK',
+    poster: 'https://i.vimeocdn.com/video/1744043776-fff0c1c16ce3085393ddf0e718271ab3bc7217ea8932c14ae04b4b471e9bfe9f-d_1280x720?&r=pad&region=us',
+    videos: [
+      { label: 'FIRST LOOK', link: 'https://vimeo.com/878187717' },
     ],
   },
 ];
@@ -82,24 +181,220 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 2,
+    title: 'ASIA CUP X HARMANPREET KAUR',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2199295186-0b260aeb2fcb5ebedc25df02ca1e66ea3200d35d60d90538c0091a12072aaeb6-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1225544749',
+  },
+  {
+    id: 3,
     title: 'SONY SPORTS — RAKESH BEDI',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2167617865-d6b4b183cb7a204692d40356c570a47d4162c448de3705e68ab90157a4312c75-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1200507675',
   },
   {
-    id: 3,
+    id: 4,
+    title: 'VIVO V27',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1670231235-e01965db7936054cd433c502188f372e04afc45c52b730aa02d20e86499ffe0c-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/810797934',
+  },
+  {
+    id: 5,
+    title: 'PAATAL LOK PROMO X JAIDEEP AHLAWAT',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2030567140-abfddb4fb0795741924b1159ade035378f1d6a318986f492e9895e963b88e9f2-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1046320358',
+  },
+  {
+    id: 6,
     title: 'VIVO V50',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1985808395-d239c3e4048ba9119ef969c823a2479f92bab1f95b8fee960b8c740490ee2b45-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1059452766',
   },
   {
-    id: 4,
-    title: 'AMAZON MX PLAYER',
+    id: 7,
+    title: 'DISCOVERY',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1637879798-d18277d49527a99a8ffbc2a1221740124d71ef9afe9918e07da3427f101a6176-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/810437793',
+  },
+  {
+    id: 8,
+    title: 'LAZY DAY X MILIND SOMAN',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2050737179-6a2805ff04b45edfeeca63229f22c5f8e50381d7ffccdfc36ecfca71d639da62-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1112487367',
+  },
+  {
+    id: 9,
+    title: 'OPPO N3 FLIP X SIDDHANTH AND JACKIE',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2015191516-21f776e61014f4c5d2dd35c1ad79e2a69c0641633e71c5b7ff860682f020e6cc-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/882346836',
+  },
+  {
+    id: 10,
+    title: 'REALME NARZO X VAANI KAPOOR AND ROHIT SARAF',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2005860683-1c884461faca3f3e71d77888dccec34d774a3980fffd0d793666470c15fe3ce7-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/844561544',
+  },
+  {
+    id: 11,
+    title: 'TATA ACE',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1837783649-356fad17c42d3ffd660b959edb41f513a233459e35f7683838b3a67bffc91766-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/937263553',
+  },
+  {
+    id: 12,
+    title: 'AMAZON MX PLAYER X SHIKHAR DHAWAN AND ORRY',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1981624915-e4b17936c1a6856f46d62e6b43f845e37264b2230aa37543c87b02f6b7db79fd-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1054564777',
+  },
+  {
+    id: 13,
+    title: 'SBI X R ASHWIN',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2073749699-293d89dc66bcc482a9b7d878b2a490097059ef54864b4b4fd585feb96f2c0fbc-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1130153129',
+  },
+  {
+    id: 14,
+    title: 'ZEPTO X THUMSUP X-FORCE',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2021113799-86d289d866574eb21302e61d46db75c20440016cafcfba33e0815d50629e5d1a-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1075566726',
+  },
+  {
+    id: 15,
+    title: 'OPPO N3 FLIP X BABIL KHAN',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2005862338-c50a95e070d4ca904722fd4bf19f736a046f44b7fd4e241ba20b2978f89a259e-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/885123312',
+  },
+  {
+    id: 16,
+    title: 'STRANGER THINGS X ROHIT SHARMA',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2133300207-15d59f0fcb238360b58abc2f67f079654febdda728820e3641eb35b81b346986-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1173175350',
+  },
+  {
+    id: 17,
+    title: 'TATA INTRA',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2015187675-55b2988633904687fefd43ea4a36652ed3db843690343db954b1d0273b6ca449-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/945681444',
+  },
+  {
+    id: 18,
+    title: 'FAMILY MAN X ANANYA PANDEY',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2135988806-f30b6adeb0675af97e12a682dbbeaa85d148f3f7840c1743f444d198adc8617b-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1173536105',
+  },
+  {
+    id: 19,
+    title: 'FLIPKART',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2133298417-4e39466248e9b3601e1031670610295623b09eed83137405c355c18266806fee-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1173173217',
+  },
+  {
+    id: 20,
+    title: 'GYAN MUSEUM TEASER',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/722101098-c2d804c59861a32da96db843504ef9dc9d9dc801fe16dda838884595ec318bbd-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/287055894',
+  },
+  {
+    id: 21,
+    title: 'USHA FAN TVC',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1607690942-448fd66f34433234f8d3c9e95560bf8d66bab2d5c02e4c5098587c3cca745c56-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/338817509',
+  },
+  {
+    id: 22,
+    title: 'INTRA V50 X RANDEEP HOODA',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2011482224-6e3b679fea3b7cb12fd47918fcac0527c0d58156552c36f9b990ffe14aaca4fc-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1011767096',
+  },
+  {
+    id: 23,
+    title: 'LINC PENS',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1894650421-e9bf16e1c217152488b08f1ce90ec7c6d05e95ba8b27dca0ebcb8b37da4f630f-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/320270389',
+  },
+  {
+    id: 24,
+    title: 'ACE RAKSHAK X VINEET KUMAR',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1939358077-d0b5f9ea58222eb9b282ec6667a83e65416eae04cc6a0d99f58ea78b82e92adf-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1020733885',
+  },
+  {
+    id: 25,
+    title: 'OPPO X SANYA MALHOTRA',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2023851926-f076f3c46b66e62e5d2dbee2a6d68892a851e7654c4e7b44f737a27a5c412616-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/879654438',
+  },
+  {
+    id: 26,
+    title: 'NATGEO CASE FILES X SHARAD KELKAR',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1449949664-fdfdcebca0eead1ca23633e6ccb0519c3be4751b3d7798e33fcc6f2bc9c7cf7d-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/719717068',
+  },
+  {
+    id: 27,
+    title: 'TVS',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2074649140-6a30b6be7e67182d663b374bd2eb5d6cd1f132a136b72a0aac138b251ad33b67-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/1130838252',
+  },
+  {
+    id: 28,
+    title: 'BAJAJ CHETAK ELECTRIC',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1805667603-b8a1fc793fb46eb081b24033ef5ccc904ffa09d634981c987a5e3d85656807d1-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/917381809',
+  },
+  {
+    id: 29,
+    title: 'OPPO N3 FLIP X SHARVARI',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1754520010-ccdfe705a55ecf03f9ee10a710f6cac66a854a91cb977683698d5f02e128c3a8-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/885121772',
+  },
+  {
+    id: 30,
+    title: 'KBC PROMO',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/2021113198-87ba7aa4919da85e90bf603911c6c4dc158e6678938dc707510903aacb5206f4-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/736770572',
+  },
+  {
+    id: 31,
+    title: 'OPPO N3 FLIP X HARSHVARRDHAN KAPOOR',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1754526063-556eab032997ab3635b721c3965a1491880464f3d6ece3b8830c9dea1f1da9e7-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/885125851',
+  },
+  {
+    id: 32,
+    title: 'THE LONGEST ENGAGEMENT',
+    category: 'MUSIC / FASHION',
+    image: 'https://i.vimeocdn.com/video/2015927642-c35d8756c6147d596093fb008fb120c4bd062b0ec9a83c2a75591868f28eeb95-d_1280x720?&r=pad&region=us',
+    link: 'https://vimeo.com/164061841',
   },
 ];
 
@@ -465,7 +760,7 @@ const App = () => {
               <div className="site-gutter w-full pb-20 sm:pb-28 lg:pb-32">
                 <div className={`flex justify-between items-end gap-4 border-b pb-4 sm:pb-6 mb-10 sm:mb-14 lg:mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
                   <h2 className={`font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>Selected Work</h2>
-                  <span className={`font-mono text-[10px] tracking-widest ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>03 / {SELECTED_WORK.length.toString().padStart(2, '0')}</span>
+                  <span className={`font-mono text-[10px] tracking-widest ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>{SELECTED_WORK.length.toString().padStart(2, '0')} PROJECTS</span>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-14 sm:gap-y-20 lg:gap-y-32 gap-x-6 lg:gap-x-12">
                   {SELECTED_WORK.map((project, i) => (
@@ -481,8 +776,8 @@ const App = () => {
                       viewport={{ once: true, amount: 0.1 }}
                       transition={{ duration: 1, ease: [0.19, 1, 0.22, 1] }}
                     >
-                      <div className={`w-full aspect-[4/3] overflow-hidden mb-4 sm:mb-6 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
-                        <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-1000 ease-[0.19,1,0.22,1] group-hover:scale-105" />
+                      <div className={`w-full aspect-video overflow-hidden mb-4 sm:mb-6 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
+                        <img src={project.image} alt={project.title} loading="lazy" decoding="async" className="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-90" />
                       </div>
                       <div className="min-w-0 flex justify-between items-start gap-4">
                         <div className="min-w-0">
@@ -530,7 +825,7 @@ const App = () => {
                     className="min-w-0 w-full flex flex-col group cursor-pointer"
                   >
                     <div className={`w-full aspect-video overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
-                       <img src={work.image} alt={work.title} className="w-full h-full object-cover transition-transform duration-1000 ease-[0.19,1,0.22,1] group-hover:scale-105" />
+                       <img src={work.image} alt={work.title} loading="lazy" decoding="async" className="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-90" />
                     </div>
                     <div className="min-w-0 flex flex-col lg:flex-row lg:justify-between lg:items-start gap-2 lg:gap-4 mt-4 sm:mt-6">
                        <h3 className="min-w-0 text-xl sm:text-2xl lg:text-3xl font-sans uppercase font-light tracking-wide leading-tight break-words">{work.title}</h3>
@@ -561,14 +856,14 @@ const App = () => {
               {NARRATIVE_WORK.map((work) => (
                  <motion.div
                     key={work.id}
-                    className="min-w-0 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-center group"
+                    className="min-w-0 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start group"
                     initial={{ y: 60, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true, amount: 0.15 }}
                     transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
                  >
-                    <div className={`relative lg:col-span-5 aspect-video lg:aspect-[3/4] overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
-                       <img src={work.poster} alt={work.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                    <div className={`relative lg:col-span-8 aspect-video overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
+                       <img src={work.poster} alt={work.title} loading="lazy" decoding="async" className="w-full h-full object-contain" />
                        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
                        <div className="absolute inset-x-3 sm:inset-x-4 bottom-3 sm:bottom-4 z-10 flex gap-2 sm:gap-3">
                          {work.videos.map((video) => (
@@ -586,7 +881,7 @@ const App = () => {
                          ))}
                        </div>
                     </div>
-                    <div className="lg:col-span-7 min-w-0 flex flex-col max-w-2xl">
+                    <div className="lg:col-span-4 min-w-0 flex flex-col max-w-2xl lg:pt-2">
                        <h3 className="text-[clamp(1.75rem,3vw,4rem)] font-sans uppercase font-light tracking-tight leading-none mb-4 sm:mb-6 break-words">{work.title}</h3>
                        <p className={`font-mono text-xs md:text-sm tracking-wide leading-relaxed uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>
                          {work.info}
