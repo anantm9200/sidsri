@@ -26,7 +26,6 @@ const SELECTED_WORK = [
   {
     id: '01',
     title: 'KAALA TEASER',
-    year: '2023',
     type: 'WEBSERIES',
     image: 'https://i.vimeocdn.com/video/1739105513-07073d98c87993ef1f14236f4c23a6aca90335e583316bbe1904a8f7d072d253-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/874827009',
@@ -34,7 +33,6 @@ const SELECTED_WORK = [
   {
     id: '02',
     title: 'DUET — TRAILER',
-    year: '2026',
     type: 'SHORT FILM',
     image: 'https://i.vimeocdn.com/video/2183812349-79b371485af04b26078db91c7de4eb4f22468ac342bd837df1d789e91b2644cb-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1213203318',
@@ -42,7 +40,6 @@ const SELECTED_WORK = [
   {
     id: '03',
     title: 'ORALAND X SKY',
-    year: '2026',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2170653403-84eeea23fd2d8be3dc278abfcac15edfad3d352f622b8b28f3076307faeb5473-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1202805509',
@@ -50,7 +47,6 @@ const SELECTED_WORK = [
   {
     id: '04',
     title: 'ASIA CUP X HARMANPREET KAUR',
-    year: '2026',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2199295186-0b260aeb2fcb5ebedc25df02ca1e66ea3200d35d60d90538c0091a12072aaeb6-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1225544749',
@@ -58,7 +54,6 @@ const SELECTED_WORK = [
   {
     id: '05',
     title: 'SONY SPORTS — RAKESH BEDI',
-    year: '2026',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2167617865-d6b4b183cb7a204692d40356c570a47d4162c448de3705e68ab90157a4312c75-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1200507675',
@@ -66,7 +61,6 @@ const SELECTED_WORK = [
   {
     id: '06',
     title: 'VIVO V27',
-    year: '2023',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1670231235-e01965db7936054cd433c502188f372e04afc45c52b730aa02d20e86499ffe0c-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/810797934',
@@ -74,7 +68,6 @@ const SELECTED_WORK = [
   {
     id: '07',
     title: 'PERFECT JUSTICE',
-    year: '2019',
     type: 'FEATURE FILM',
     image: 'https://i.vimeocdn.com/video/2190890551-73ee2d7719500a4ac1f24235e5165e6f26ec0f6e14ec28c04b8b69e032a75772-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/309167152',
@@ -82,7 +75,6 @@ const SELECTED_WORK = [
   {
     id: '08',
     title: 'PAATAL LOK PROMO X JAIDEEP AHLAWAT',
-    year: '2025',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2030567140-abfddb4fb0795741924b1159ade035378f1d6a318986f492e9895e963b88e9f2-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1046320358',
@@ -90,7 +82,6 @@ const SELECTED_WORK = [
   {
     id: '09',
     title: 'VIVO V50',
-    year: '2025',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1985808395-d239c3e4048ba9119ef969c823a2479f92bab1f95b8fee960b8c740490ee2b45-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1059452766',
@@ -98,7 +89,6 @@ const SELECTED_WORK = [
   {
     id: '10',
     title: 'DISCOVERY',
-    year: '2023',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1637879798-d18277d49527a99a8ffbc2a1221740124d71ef9afe9918e07da3427f101a6176-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/810437793',
@@ -106,7 +96,6 @@ const SELECTED_WORK = [
   {
     id: '11',
     title: 'LAZY DAY X MILIND SOMAN',
-    year: '2025',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2050737179-6a2805ff04b45edfeeca63229f22c5f8e50381d7ffccdfc36ecfca71d639da62-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1112487367',
@@ -114,7 +103,6 @@ const SELECTED_WORK = [
   {
     id: '12',
     title: 'OPPO N3 FLIP X SIDDHANTH AND JACKIE',
-    year: '2023',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2015191516-21f776e61014f4c5d2dd35c1ad79e2a69c0641633e71c5b7ff860682f020e6cc-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/882346836',
@@ -440,7 +428,18 @@ const App = () => {
   const scrollToAbout = () => {
     if (activeView !== 'home') {
       setActiveView('home');
-      setTimeout(() => aboutRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
+      const scrollWhenReady = (attempt = 0) => {
+        if (aboutRef.current) {
+          aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+
+        if (attempt < 120) {
+          requestAnimationFrame(() => scrollWhenReady(attempt + 1));
+        }
+      };
+
+      requestAnimationFrame(() => scrollWhenReady());
     } else {
       aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
@@ -488,6 +487,17 @@ const App = () => {
           font-size: clamp(1rem, 2vw, 2rem);
         }
 
+        /* Keep the mobile composition cinematic while removing excess dead space. */
+        @media (max-width: 639px) and (orientation: portrait) {
+          .hero-stage {
+            height: 58svh;
+          }
+
+          .hero-lower-nav {
+            margin-top: 1.25rem;
+          }
+        }
+
         @media (max-width: 359px) {
           :root {
             --site-gutter: 0.75rem;
@@ -509,7 +519,7 @@ const App = () => {
           }
 
           .hero-stage {
-            height: 58svh;
+            height: 52svh;
           }
         }
 
@@ -558,20 +568,20 @@ const App = () => {
           onClick={() => { setActiveView('home'); window.scrollTo({top: 0, behavior: 'smooth'}); }} 
           className="min-w-0 flex flex-col items-center cursor-pointer pointer-events-auto group w-fit"
         >
-          <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 text-center">
+          <div className="text-center">
             <h1 className="brand-title font-sans text-[clamp(10px,1.5vw,18px)] tracking-[0.12em] sm:tracking-widest uppercase font-semibold leading-none whitespace-normal sm:whitespace-nowrap">Siddharth Srinivasan</h1>
             <p className="font-mono text-[8px] sm:text-[10px] md:text-sm tracking-[0.3em] sm:tracking-[0.4em] uppercase mt-1.5 sm:mt-2 opacity-80">DOP</p>
           </div>
         </div>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-6 lg:gap-12 pointer-events-auto">
-          <button onClick={scrollToAbout} className="group cursor-pointer w-fit overflow-hidden py-2 px-1">
-             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4">
+          <button onClick={scrollToAbout} className="cursor-pointer w-fit py-2 px-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-current" aria-label="Go to the About section">
+             <div>
                <span className="header-nav-label font-mono text-[9px] sm:text-[10px] md:text-xs tracking-[0.16em] sm:tracking-[0.2em] uppercase">ABOUT</span>
              </div>
           </button>
-          <button onClick={scrollToFooter} className="group cursor-pointer w-fit overflow-hidden py-2 px-1">
-             <div className="transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-4">
+          <button onClick={scrollToFooter} className="cursor-pointer w-fit py-2 px-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-current" aria-label="Go to the Contact section">
+             <div>
                <span className="header-nav-label font-mono text-[9px] sm:text-[10px] md:text-xs tracking-[0.16em] sm:tracking-[0.2em] uppercase">CONTACT</span>
              </div>
           </button>
@@ -779,12 +789,9 @@ const App = () => {
                       <div className={`w-full aspect-video overflow-hidden mb-4 sm:mb-6 transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
                         <img src={project.image} alt={project.title} loading="lazy" decoding="async" className="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-90" />
                       </div>
-                      <div className="min-w-0 flex justify-between items-start gap-4">
-                        <div className="min-w-0">
-                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-sans uppercase font-light tracking-wide leading-tight mb-2 break-words">{project.title}</h3>
-                          <p className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{project.type}</p>
-                        </div>
-                        <span className={`font-mono text-[10px] tracking-widest ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>{project.year}</span>
+                      <div className="min-w-0">
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-sans uppercase font-light tracking-wide leading-tight mb-2 break-words">{project.title}</h3>
+                        <p className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{project.type}</p>
                       </div>
                     </motion.a>
                   ))}
@@ -828,7 +835,7 @@ const App = () => {
                        <img src={work.image} alt={work.title} loading="lazy" decoding="async" className="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-90" />
                     </div>
                     <div className="min-w-0 flex flex-col lg:flex-row lg:justify-between lg:items-start gap-2 lg:gap-4 mt-4 sm:mt-6">
-                       <h3 className="min-w-0 text-xl sm:text-2xl lg:text-3xl font-sans uppercase font-light tracking-wide leading-tight break-words">{work.title}</h3>
+                       <h3 className="min-w-0 text-2xl sm:text-3xl lg:text-4xl font-sans uppercase font-light tracking-wide leading-tight break-words">{work.title}</h3>
                        <span className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{work.category}</span>
                     </div>
                   </motion.a>
@@ -900,26 +907,28 @@ const App = () => {
         {/* TYPOGRAPHIC EDITORIAL FOOTER */}
         <footer ref={footerRef} className={`site-frame site-gutter relative w-full pt-20 sm:pt-24 lg:pt-32 pb-6 sm:pb-8 flex flex-col justify-between overflow-hidden transition-colors duration-1000 scroll-mt-20 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-10 sm:gap-12 xl:gap-6 mb-16 sm:mb-24 lg:mb-28 w-full">
-              <div className="sm:col-span-1 xl:col-span-3 min-w-0 flex flex-col">
+              {activeView === 'home' && (
+                <div className="sm:col-span-1 xl:col-span-3 min-w-0 flex flex-col">
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Profile</span>
                   <p className={`max-w-md font-mono text-[10px] md:text-xs tracking-[0.08em] sm:tracking-[0.1em] uppercase leading-relaxed xl:pr-6 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>
                       Siddharth Srinivasan is a cinematographer crafting imagery that defies convention, working globally across commercial and narrative formats.
                   </p>
-              </div>
+                </div>
+              )}
 
-              <div className="sm:col-span-1 xl:col-span-4 min-w-0 flex flex-col">
+              <div className={`${activeView === 'home' ? 'sm:col-span-1 xl:col-span-4' : 'sm:col-span-1 xl:col-span-5'} min-w-0 flex flex-col`}>
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Direct Inquiries</span>
                   <a href="mailto:hello@siddharth.com" className={`max-w-full text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1] break-words hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>HELLO@SIDDHARTH.COM</a>
                   <a href="tel:+919876543210" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none whitespace-nowrap hover:italic transition-all duration-300 mt-4 sm:mt-6 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>+91 98765 43210</a>
               </div>
 
-              <div className="sm:col-span-1 xl:col-span-3 min-w-0 flex flex-col">
+              <div className={`${activeView === 'home' ? 'sm:col-span-1 xl:col-span-3' : 'sm:col-span-1 xl:col-span-4'} min-w-0 flex flex-col`}>
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Network</span>
                   <a href={VIMEO_PROFILE} target="_blank" rel="noopener noreferrer" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1] hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>VIMEO</a>
                   <a href="#" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none hover:italic transition-all duration-300 mt-4 sm:mt-6 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>INSTAGRAM</a>
               </div>
 
-              <div className="sm:col-span-1 xl:col-span-2 min-w-0 flex flex-col xl:items-end text-left xl:text-right">
+              <div className={`${activeView === 'home' ? 'sm:col-span-1 xl:col-span-2' : 'sm:col-span-1 xl:col-span-3'} min-w-0 flex flex-col xl:items-end text-left xl:text-right`}>
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Base</span>
                   <p className="text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1]">MUMBAI</p>
                   <p className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none mt-2 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>INDIA</p>
