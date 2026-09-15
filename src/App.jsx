@@ -39,21 +39,21 @@ const SELECTED_WORK = [
   },
   {
     id: '03',
-    title: 'ORALAND X SKY',
+    title: 'ORALAND x Suryakumar Yadav',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2170653403-84eeea23fd2d8be3dc278abfcac15edfad3d352f622b8b28f3076307faeb5473-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1202805509',
   },
   {
     id: '04',
-    title: 'ASIA CUP X HARMANPREET KAUR',
+    title: 'ASIA CUP x Harmanpreet Kaur',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2199295186-0b260aeb2fcb5ebedc25df02ca1e66ea3200d35d60d90538c0091a12072aaeb6-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1225544749',
   },
   {
     id: '05',
-    title: 'SONY SPORTS — RAKESH BEDI',
+    title: 'SONYSPORT x Rakesh Bedi',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2167617865-d6b4b183cb7a204692d40356c570a47d4162c448de3705e68ab90157a4312c75-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1200507675',
@@ -74,7 +74,7 @@ const SELECTED_WORK = [
   },
   {
     id: '08',
-    title: 'PAATAL LOK PROMO X JAIDEEP AHLAWAT',
+    title: 'PAATAL LOK PROMO x Jaideep Ahlawat',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2030567140-abfddb4fb0795741924b1159ade035378f1d6a318986f492e9895e963b88e9f2-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1046320358',
@@ -95,14 +95,14 @@ const SELECTED_WORK = [
   },
   {
     id: '11',
-    title: 'LAZY DAY X MILIND SOMAN',
+    title: 'LAZY DAY x Milind Soman',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2050737179-6a2805ff04b45edfeeca63229f22c5f8e50381d7ffccdfc36ecfca71d639da62-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1112487367',
   },
   {
     id: '12',
-    title: 'OPPO N3 FLIP X SIDDHANTH AND JACKIE',
+    title: 'OPPO N3 FLIP x Siddhanth and Jackie',
     type: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2015191516-21f776e61014f4c5d2dd35c1ad79e2a69c0641633e71c5b7ff860682f020e6cc-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/882346836',
@@ -135,7 +135,7 @@ const NARRATIVE_WORK = [
     info: 'TAIWANESE | FEATURE FILM',
     poster: 'https://i.vimeocdn.com/video/2190890551-73ee2d7719500a4ac1f24235e5165e6f26ec0f6e14ec28c04b8b69e032a75772-d_1280x720?&r=pad&region=us',
     videos: [
-      { label: 'WATCH', link: 'https://vimeo.com/309167152' },
+      { label: 'FIRST LOOK', link: 'https://vimeo.com/309167152' },
     ],
   },
   {
@@ -162,21 +162,21 @@ const NARRATIVE_WORK = [
 const COMMERCIAL_WORK = [
   {
     id: 1,
-    title: 'ORALAND X SKY',
+    title: 'ORALAND x Suryakumar Yadav',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2170653403-84eeea23fd2d8be3dc278abfcac15edfad3d352f622b8b28f3076307faeb5473-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1202805509',
   },
   {
     id: 2,
-    title: 'ASIA CUP X HARMANPREET KAUR',
+    title: 'ASIA CUP x Harmanpreet Kaur',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2199295186-0b260aeb2fcb5ebedc25df02ca1e66ea3200d35d60d90538c0091a12072aaeb6-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1225544749',
   },
   {
     id: 3,
-    title: 'SONY SPORTS — RAKESH BEDI',
+    title: 'SONYSPORT x Rakesh Bedi',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2167617865-d6b4b183cb7a204692d40356c570a47d4162c448de3705e68ab90157a4312c75-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1200507675',
@@ -190,7 +190,7 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 5,
-    title: 'PAATAL LOK PROMO X JAIDEEP AHLAWAT',
+    title: 'PAATAL LOK PROMO x Jaideep Ahlawat',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2030567140-abfddb4fb0795741924b1159ade035378f1d6a318986f492e9895e963b88e9f2-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1046320358',
@@ -211,21 +211,21 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 8,
-    title: 'LAZY DAY X MILIND SOMAN',
+    title: 'LAZY DAY x Milind Soman',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2050737179-6a2805ff04b45edfeeca63229f22c5f8e50381d7ffccdfc36ecfca71d639da62-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1112487367',
   },
   {
     id: 9,
-    title: 'OPPO N3 FLIP X SIDDHANTH AND JACKIE',
+    title: 'OPPO N3 FLIP x Siddhanth and Jackie',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2015191516-21f776e61014f4c5d2dd35c1ad79e2a69c0641633e71c5b7ff860682f020e6cc-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/882346836',
   },
   {
     id: 10,
-    title: 'REALME NARZO X VAANI KAPOOR AND ROHIT SARAF',
+    title: 'REALME NARZO x Vaani Kapoor and Rohit Saraf',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2005860683-1c884461faca3f3e71d77888dccec34d774a3980fffd0d793666470c15fe3ce7-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/844561544',
@@ -239,14 +239,14 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 12,
-    title: 'AMAZON MX PLAYER X SHIKHAR DHAWAN AND ORRY',
+    title: 'AMAZON MX PLAYER x Shikhar Dhawan and Orry',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1981624915-e4b17936c1a6856f46d62e6b43f845e37264b2230aa37543c87b02f6b7db79fd-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1054564777',
   },
   {
     id: 13,
-    title: 'SBI X R ASHWIN',
+    title: 'SBI x R Ashwin',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2073749699-293d89dc66bcc482a9b7d878b2a490097059ef54864b4b4fd585feb96f2c0fbc-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1130153129',
@@ -260,14 +260,14 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 15,
-    title: 'OPPO N3 FLIP X BABIL KHAN',
+    title: 'OPPO N3 FLIP x Babil Khan',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2005862338-c50a95e070d4ca904722fd4bf19f736a046f44b7fd4e241ba20b2978f89a259e-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/885123312',
   },
   {
     id: 16,
-    title: 'STRANGER THINGS X ROHIT SHARMA',
+    title: 'STRANGER THINGS x Rohit Sharma',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2133300207-15d59f0fcb238360b58abc2f67f079654febdda728820e3641eb35b81b346986-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1173175350',
@@ -281,7 +281,7 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 18,
-    title: 'FAMILY MAN X ANANYA PANDEY',
+    title: 'FAMILY MAN x Ananya Pandey',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2135988806-f30b6adeb0675af97e12a682dbbeaa85d148f3f7840c1743f444d198adc8617b-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1173536105',
@@ -309,7 +309,7 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 22,
-    title: 'INTRA V50 X RANDEEP HOODA',
+    title: 'INTRA V50 x Randeep Hooda',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2011482224-6e3b679fea3b7cb12fd47918fcac0527c0d58156552c36f9b990ffe14aaca4fc-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1011767096',
@@ -323,21 +323,21 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 24,
-    title: 'ACE RAKSHAK X VINEET KUMAR',
+    title: 'ACE RAKSHAK x Vineet Kumar',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1939358077-d0b5f9ea58222eb9b282ec6667a83e65416eae04cc6a0d99f58ea78b82e92adf-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/1020733885',
   },
   {
     id: 25,
-    title: 'OPPO X SANYA MALHOTRA',
+    title: 'OPPO x Sanya Malhotra',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/2023851926-f076f3c46b66e62e5d2dbee2a6d68892a851e7654c4e7b44f737a27a5c412616-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/879654438',
   },
   {
     id: 26,
-    title: 'NATGEO CASE FILES X SHARAD KELKAR',
+    title: 'NATGEO CASE FILES x Sharad Kelkar',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1449949664-fdfdcebca0eead1ca23633e6ccb0519c3be4751b3d7798e33fcc6f2bc9c7cf7d-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/719717068',
@@ -358,7 +358,7 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 29,
-    title: 'OPPO N3 FLIP X SHARVARI',
+    title: 'OPPO N3 FLIP x Sharvari',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1754520010-ccdfe705a55ecf03f9ee10a710f6cac66a854a91cb977683698d5f02e128c3a8-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/885121772',
@@ -372,7 +372,7 @@ const COMMERCIAL_WORK = [
   },
   {
     id: 31,
-    title: 'OPPO N3 FLIP X HARSHVARRDHAN KAPOOR',
+    title: 'OPPO N3 FLIP x Harshvarrdhan Kapoor',
     category: 'COMMERCIAL',
     image: 'https://i.vimeocdn.com/video/1754526063-556eab032997ab3635b721c3965a1491880464f3d6ece3b8830c9dea1f1da9e7-d_1280x720?&r=pad&region=us',
     link: 'https://vimeo.com/885125851',
@@ -393,11 +393,19 @@ const getPagination = (current, total, windowSize = 5) => {
   return Array.from({ length: visibleCount }, (_, index) => start + index);
 };
 
+const getVimeoEmbedUrl = (link) => {
+  const videoId = link.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1];
+  return videoId
+    ? `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0&dnt=1`
+    : '';
+};
+
 const App = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [theme, setTheme] = useState('dark');
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const [activeView, setActiveView] = useState('home');
+  const [activeVideo, setActiveVideo] = useState(null);
   
   const footerRef = useRef(null);
   const aboutRef = useRef(null); 
@@ -419,7 +427,28 @@ const App = () => {
     return () => clearTimeout(timeout);
   }, [currentImageIndex, activeView]);
 
+  useEffect(() => {
+    if (!activeVideo) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setActiveVideo(null);
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [activeVideo]);
+
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
+
+  const playVideo = (link, title) => {
+    setActiveVideo({ link, title });
+  };
 
   const scrollToFooter = () => {
     footerRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -625,6 +654,56 @@ const App = () => {
         </div>
       </header>
 
+      {/* In-page Vimeo player: project clicks never leave the portfolio. */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-3 sm:p-6 lg:p-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setActiveVideo(null)}
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label={`Video player: ${activeVideo.title}`}
+              className="site-frame w-full max-w-[1600px]"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="mb-3 sm:mb-4 flex items-center justify-between gap-4 text-white">
+                <p className="min-w-0 truncate font-mono text-[10px] sm:text-xs tracking-[0.12em] sm:tracking-[0.16em]">
+                  {activeVideo.title}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setActiveVideo(null)}
+                  autoFocus
+                  className="shrink-0 border border-white/30 px-3 py-2 font-mono text-[10px] tracking-[0.2em] uppercase transition-colors hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  aria-label="Close video player"
+                >
+                  Close ×
+                </button>
+              </div>
+              <div className="relative w-full aspect-video overflow-hidden bg-black shadow-2xl">
+                <iframe
+                  src={getVimeoEmbedUrl(activeVideo.link)}
+                  title={activeVideo.title}
+                  className="absolute inset-0 h-full w-full border-0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence mode="wait">
         
         {/* === HOME VIEW === */}
@@ -752,35 +831,37 @@ const App = () => {
             <section ref={nextSectionRef} className="site-frame relative z-30 w-full pt-12 sm:pt-20 lg:pt-32">
               
               {/* ABOUT SECTION */}
-              <div ref={aboutRef} className="site-gutter w-full pt-6 sm:pt-8 pb-20 sm:pb-28 lg:pb-48 scroll-mt-24">
+              <div ref={aboutRef} className="site-gutter w-full pt-6 sm:pt-8 pb-16 sm:pb-20 lg:pb-24 scroll-mt-24">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-start">
                   <div className="lg:col-span-4 flex items-center gap-3 sm:gap-4">
                     <div className={`w-2 h-2 rounded-full ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
                     <h2 className={`font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>About</h2>
                   </div>
                   <div className="lg:col-span-8">
-                    <h3 className="max-w-6xl text-[clamp(1.25rem,2.5vw,3rem)] font-sans font-light leading-[1.3] tracking-wide">
-                      Siddharth Srinivasan is a cinematographer crafting imagery that defies convention. Based in Mumbai, he works globally across commercial and narrative formats, exploring the quiet intersections of human emotion and cinematic restraint.
-                    </h3>
+                    <div className="max-w-5xl space-y-5 sm:space-y-6 text-xl sm:text-2xl lg:text-[1.15rem] xl:text-[1.3rem] 2xl:text-[1.55rem] font-sans font-light leading-[1.45] tracking-wide">
+                      <p>I’m Siddharth Srinivasan, a Mumbai-based cinematographer working across commercials and long-form.</p>
+                      <p>My approach is grounded in strong composition, naturalistic light and a controlled visual language—creating images that feel cinematic without feeling overworked. I’m drawn to contrast, atmosphere and the small details that reveal something about a story’s world.</p>
+                      <p>Whether shaping a precise visual language for a 30/45 second commercial or finding the rhythm of a feature or series, I work closely with directors to strengthen the idea while remaining open to the unexpected moments that emerge along the way.</p>
+                      <p>I care deeply about the frame, but always in service of the story.</p>
+                      <p>For me, good work begins with good people, strong ideas and a willingness to push both.</p>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* SELECTED WORKS GRID */}
               <div className="site-gutter w-full pb-20 sm:pb-28 lg:pb-32">
-                <div className={`flex justify-between items-end gap-4 border-b pb-4 sm:pb-6 mb-10 sm:mb-14 lg:mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
+                <div className={`border-b pb-4 sm:pb-6 mb-10 sm:mb-14 lg:mb-16 transition-colors duration-1000 ${theme === 'dark' ? 'border-neutral-800' : 'border-neutral-200'}`}>
                   <h2 className={`font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>Selected Work</h2>
-                  <span className={`font-mono text-[10px] tracking-widest ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>{SELECTED_WORK.length.toString().padStart(2, '0')} PROJECTS</span>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-14 sm:gap-y-20 lg:gap-y-32 gap-x-6 lg:gap-x-12">
                   {SELECTED_WORK.map((project, i) => (
-                    <motion.a 
+                    <motion.button
                       key={project.id} 
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Watch ${project.title} on Vimeo`}
-                      className={`min-w-0 flex flex-col group cursor-pointer ${i % 2 !== 0 ? 'md:mt-20 lg:mt-32' : ''}`}
+                      type="button"
+                      onClick={() => playVideo(project.link, project.title)}
+                      aria-label={`Play ${project.title} on this page`}
+                      className={`min-w-0 w-full flex flex-col text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-current ${i % 2 !== 0 ? 'md:mt-20 lg:mt-32' : ''}`}
                       initial={{ y: 100, opacity: 0 }}
                       whileInView={{ y: 0, opacity: 1 }}
                       viewport={{ once: true, amount: 0.1 }}
@@ -790,10 +871,10 @@ const App = () => {
                         <img src={project.image} alt={project.title} loading="lazy" decoding="async" className="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-90" />
                       </div>
                       <div className="min-w-0">
-                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-sans uppercase font-light tracking-wide leading-tight mb-2 break-words">{project.title}</h3>
+                        <h3 className="text-lg sm:text-xl lg:text-2xl font-sans font-light tracking-wide leading-tight mb-2 break-words">{project.title}</h3>
                         <p className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{project.type}</p>
                       </div>
-                    </motion.a>
+                    </motion.button>
                   ))}
                 </div>
               </div>
@@ -818,27 +899,26 @@ const App = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-14 sm:gap-y-20 lg:gap-y-24 gap-x-5 md:gap-x-8 lg:gap-x-12">
               <AnimatePresence mode="popLayout">
                 {COMMERCIAL_WORK.map((work) => (
-                  <motion.a
+                  <motion.button
                     key={work.id}
-                    href={work.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Watch ${work.title} on Vimeo`}
+                    type="button"
+                    onClick={() => playVideo(work.link, work.title)}
+                    aria-label={`Play ${work.title} on this page`}
                     layout
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.5 }}
-                    className="min-w-0 w-full flex flex-col group cursor-pointer"
+                    className="min-w-0 w-full flex flex-col text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-current"
                   >
                     <div className={`w-full aspect-video overflow-hidden transition-colors duration-1000 ${theme === 'dark' ? 'bg-[#111]' : 'bg-[#e5e5e5]'}`}>
                        <img src={work.image} alt={work.title} loading="lazy" decoding="async" className="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-90" />
                     </div>
                     <div className="min-w-0 flex flex-col lg:flex-row lg:justify-between lg:items-start gap-2 lg:gap-4 mt-4 sm:mt-6">
-                       <h3 className="min-w-0 text-2xl sm:text-3xl lg:text-4xl font-sans uppercase font-light tracking-wide leading-tight break-words">{work.title}</h3>
+                       <h3 className="min-w-0 text-lg sm:text-xl lg:text-2xl font-sans font-light tracking-wide leading-tight break-words">{work.title}</h3>
                        <span className={`font-mono text-[10px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-400'}`}>{work.category}</span>
                     </div>
-                  </motion.a>
+                  </motion.button>
                 ))}
               </AnimatePresence>
             </div>
@@ -874,17 +954,16 @@ const App = () => {
                        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
                        <div className="absolute inset-x-3 sm:inset-x-4 bottom-3 sm:bottom-4 z-10 flex gap-2 sm:gap-3">
                          {work.videos.map((video) => (
-                           <a
+                           <button
                              key={video.label}
-                             href={video.link}
-                             target="_blank"
-                             rel="noopener noreferrer"
-                             aria-label={`Watch ${work.title} ${video.label.toLowerCase()} on Vimeo`}
+                             type="button"
+                             onClick={() => playVideo(video.link, `${work.title} — ${video.label}`)}
+                             aria-label={`Play ${work.title} ${video.label.toLowerCase()} on this page`}
                              className="min-w-0 flex-1 sm:flex-none flex items-center justify-between gap-4 border border-white/35 bg-black/55 backdrop-blur-md px-3 sm:px-4 py-2.5 sm:py-3 text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                            >
                              <span className="font-mono text-[11px] sm:text-xs tracking-[0.18em] uppercase">{video.label}</span>
-                             <span aria-hidden="true" className="font-mono text-xs">↗</span>
-                           </a>
+                             <span aria-hidden="true" className="font-mono text-xs">▶</span>
+                           </button>
                          ))}
                        </div>
                     </div>
