@@ -386,6 +386,23 @@ const COMMERCIAL_WORK = [
   },
 ];
 
+const SELECTED_VIDEO_PLAYLIST = SELECTED_WORK.map((work) => ({
+  link: work.link,
+  title: work.title,
+}));
+
+const COMMERCIAL_VIDEO_PLAYLIST = COMMERCIAL_WORK.map((work) => ({
+  link: work.link,
+  title: work.title,
+}));
+
+const NARRATIVE_VIDEO_PLAYLIST = NARRATIVE_WORK.flatMap((work) =>
+  work.videos.map((video) => ({
+    link: video.link,
+    title: `${work.title} — ${video.label}`,
+  }))
+);
+
 const getPagination = (current, total, windowSize = 5) => {
   const start = Math.floor(current / windowSize) * windowSize;
   const visibleCount = Math.min(windowSize, total - start);
@@ -410,6 +427,8 @@ const App = () => {
   const footerRef = useRef(null);
   const aboutRef = useRef(null); 
   const nextSectionRef = useRef(null);
+  const playerShellRef = useRef(null);
+  const videoHistoryPushedRef = useRef(false);
 
   useEffect(() => {
     setIsAppLoaded(true);
@@ -428,11 +447,28 @@ const App = () => {
   }, [currentImageIndex, activeView]);
 
   useEffect(() => {
+    const closeVideoOnBack = () => {
+      if (!videoHistoryPushedRef.current) return;
+      videoHistoryPushedRef.current = false;
+      setActiveVideo(null);
+    };
+
+    window.addEventListener('popstate', closeVideoOnBack);
+    return () => window.removeEventListener('popstate', closeVideoOnBack);
+  }, []);
+
+  useEffect(() => {
     if (!activeVideo) return undefined;
 
     const previousOverflow = document.body.style.overflow;
     const closeOnEscape = (event) => {
-      if (event.key === 'Escape') setActiveVideo(null);
+      if (event.key !== 'Escape') return;
+
+      if (videoHistoryPushedRef.current) {
+        window.history.back();
+      } else {
+        setActiveVideo(null);
+      }
     };
 
     document.body.style.overflow = 'hidden';
@@ -446,8 +482,54 @@ const App = () => {
 
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
-  const playVideo = (link, title) => {
-    setActiveVideo({ link, title });
+  const playVideo = (link, title, playlist) => {
+    const videoIndex = Math.max(
+      0,
+      playlist.findIndex((video) => video.link === link && video.title === title)
+    );
+
+    if (!videoHistoryPushedRef.current) {
+      window.history.pushState(
+        { ...(window.history.state || {}), portfolioVideo: true },
+        '',
+        window.location.href
+      );
+      videoHistoryPushedRef.current = true;
+    }
+
+    setActiveVideo({ link, title, playlist, index: videoIndex });
+  };
+
+  const closeVideo = () => {
+    if (document.fullscreenElement && document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+
+    if (videoHistoryPushedRef.current) {
+      window.history.back();
+    } else {
+      setActiveVideo(null);
+    }
+  };
+
+  const playNextVideo = () => {
+    if (!activeVideo?.playlist?.length) return;
+    const nextIndex = (activeVideo.index + 1) % activeVideo.playlist.length;
+    const nextVideo = activeVideo.playlist[nextIndex];
+    setActiveVideo({ ...nextVideo, playlist: activeVideo.playlist, index: nextIndex });
+  };
+
+  const enterVideoFullscreen = () => {
+    const playerShell = playerShellRef.current;
+    if (!playerShell) return;
+
+    if (playerShell.requestFullscreen) {
+      playerShell.requestFullscreen().catch(() => {});
+    } else if (playerShell.webkitRequestFullscreen) {
+      playerShell.webkitRequestFullscreen();
+    }
   };
 
   const scrollToFooter = () => {
@@ -514,6 +596,24 @@ const App = () => {
 
         .footer-signature {
           font-size: clamp(1rem, 2vw, 2rem);
+        }
+
+        .video-player-shell:fullscreen,
+        .video-player-shell:-webkit-full-screen {
+          width: 100vw !important;
+          max-width: none !important;
+          height: 100vh !important;
+          padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          background: #050505;
+        }
+
+        .video-player-shell:fullscreen .video-player-frame,
+        .video-player-shell:-webkit-full-screen .video-player-frame {
+          width: min(100%, calc((100vh - 9rem) * 16 / 9));
+          margin-inline: auto;
         }
 
         /* Keep the mobile composition cinematic while removing excess dead space. */
@@ -658,31 +758,33 @@ const App = () => {
       <AnimatePresence>
         {activeVideo && (
           <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-3 sm:p-6 lg:p-10"
+            className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/95 p-3 sm:p-5 lg:p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            onClick={() => setActiveVideo(null)}
+            onClick={closeVideo}
           >
             <motion.div
+              ref={playerShellRef}
               role="dialog"
               aria-modal="true"
               aria-label={`Video player: ${activeVideo.title}`}
-              className="site-frame w-full max-w-[1600px]"
+              className="video-player-shell bg-[#050505] text-white"
+              style={{ width: 'min(94vw, 1100px, calc((100svh - 9rem) * 16 / 9))' }}
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="mb-3 sm:mb-4 flex items-center justify-between gap-4 text-white">
+              <div className="flex min-h-12 items-center justify-between gap-4 border-b border-white/15 px-3 py-3 sm:px-4">
                 <p className="min-w-0 truncate font-mono text-[10px] sm:text-xs tracking-[0.12em] sm:tracking-[0.16em]">
                   {activeVideo.title}
                 </p>
                 <button
                   type="button"
-                  onClick={() => setActiveVideo(null)}
+                  onClick={closeVideo}
                   autoFocus
                   className="shrink-0 border border-white/30 px-3 py-2 font-mono text-[10px] tracking-[0.2em] uppercase transition-colors hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   aria-label="Close video player"
@@ -690,7 +792,7 @@ const App = () => {
                   Close ×
                 </button>
               </div>
-              <div className="relative w-full aspect-video overflow-hidden bg-black shadow-2xl">
+              <div className="video-player-frame relative w-full aspect-video overflow-hidden bg-black shadow-2xl">
                 <iframe
                   src={getVimeoEmbedUrl(activeVideo.link)}
                   title={activeVideo.title}
@@ -698,6 +800,34 @@ const App = () => {
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
                 />
+              </div>
+              <div className="flex min-h-14 flex-wrap items-center justify-between gap-2 border-t border-white/15 px-3 py-3 sm:px-4">
+                <button
+                  type="button"
+                  onClick={closeVideo}
+                  className="font-mono text-[9px] sm:text-[10px] tracking-[0.16em] uppercase text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                >
+                  ← Back to projects
+                </button>
+                <span className="hidden font-mono text-[9px] tracking-[0.18em] text-white/40 sm:inline">
+                  {String(activeVideo.index + 1).padStart(2, '0')} / {String(activeVideo.playlist.length).padStart(2, '0')}
+                </span>
+                <div className="flex items-center gap-3 sm:gap-5">
+                  <button
+                    type="button"
+                    onClick={enterVideoFullscreen}
+                    className="font-mono text-[9px] sm:text-[10px] tracking-[0.16em] uppercase text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                  >
+                    Fullscreen
+                  </button>
+                  <button
+                    type="button"
+                    onClick={playNextVideo}
+                    className="font-mono text-[9px] sm:text-[10px] tracking-[0.16em] uppercase text-white transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                  >
+                    Next video →
+                  </button>
+                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -859,7 +989,7 @@ const App = () => {
                     <motion.button
                       key={project.id} 
                       type="button"
-                      onClick={() => playVideo(project.link, project.title)}
+                      onClick={() => playVideo(project.link, project.title, SELECTED_VIDEO_PLAYLIST)}
                       aria-label={`Play ${project.title} on this page`}
                       className={`min-w-0 w-full flex flex-col text-left group cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-current ${i % 2 !== 0 ? 'md:mt-20 lg:mt-32' : ''}`}
                       initial={{ y: 100, opacity: 0 }}
@@ -902,7 +1032,7 @@ const App = () => {
                   <motion.button
                     key={work.id}
                     type="button"
-                    onClick={() => playVideo(work.link, work.title)}
+                    onClick={() => playVideo(work.link, work.title, COMMERCIAL_VIDEO_PLAYLIST)}
                     aria-label={`Play ${work.title} on this page`}
                     layout
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -957,7 +1087,7 @@ const App = () => {
                            <button
                              key={video.label}
                              type="button"
-                             onClick={() => playVideo(video.link, `${work.title} — ${video.label}`)}
+                             onClick={() => playVideo(video.link, `${work.title} — ${video.label}`, NARRATIVE_VIDEO_PLAYLIST)}
                              aria-label={`Play ${work.title} ${video.label.toLowerCase()} on this page`}
                              className="min-w-0 flex-1 sm:flex-none flex items-center justify-between gap-4 border border-white/35 bg-black/55 backdrop-blur-md px-3 sm:px-4 py-2.5 sm:py-3 text-white transition-all duration-300 hover:bg-white hover:text-black hover:border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                            >
