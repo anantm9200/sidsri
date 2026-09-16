@@ -21,6 +21,8 @@ const HERO_IMAGES = [
 ];
 
 const VIMEO_PROFILE = 'https://vimeo.com/siddharthdop';
+const INSTAGRAM_PROFILE = 'https://www.instagram.com/_siddharth_srinivasan_/';
+const IMDB_PROFILE = 'https://www.imdb.com/name/nm5945404/';
 
 const SELECTED_WORK = [
   {
@@ -1127,20 +1129,21 @@ const App = () => {
 
               <div className={`${activeView === 'home' ? 'sm:col-span-1 xl:col-span-4' : 'sm:col-span-1 xl:col-span-5'} min-w-0 flex flex-col`}>
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Direct Inquiries</span>
-                  <a href="mailto:hello@siddharth.com" className={`max-w-full text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1] break-words hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>HELLO@SIDDHARTH.COM</a>
-                  <a href="tel:+919876543210" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none whitespace-nowrap hover:italic transition-all duration-300 mt-4 sm:mt-6 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>+91 98765 43210</a>
+                  <a href="mailto:hello@siddharth.com" className={`max-w-full text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-[1.2] break-words hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>HELLO@SIDDHARTH.COM</a>
+                  <a href="tel:+919819391864" className={`text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-none whitespace-nowrap hover:italic transition-all duration-300 mt-3 sm:mt-4 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>+91 98193 91864</a>
               </div>
 
               <div className={`${activeView === 'home' ? 'sm:col-span-1 xl:col-span-3' : 'sm:col-span-1 xl:col-span-4'} min-w-0 flex flex-col`}>
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Network</span>
-                  <a href={VIMEO_PROFILE} target="_blank" rel="noopener noreferrer" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1] hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>VIMEO</a>
-                  <a href="#" className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none hover:italic transition-all duration-300 mt-4 sm:mt-6 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>INSTAGRAM</a>
+                  <a href={VIMEO_PROFILE} target="_blank" rel="noopener noreferrer" aria-label="Open Siddharth Srinivasan on Vimeo" className={`text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-[1.2] hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>VIMEO</a>
+                  <a href={INSTAGRAM_PROFILE} target="_blank" rel="noopener noreferrer" aria-label="Open Siddharth Srinivasan on Instagram" className={`text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-none hover:italic transition-all duration-300 mt-3 sm:mt-4 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>INSTAGRAM</a>
+                  <a href={IMDB_PROFILE} target="_blank" rel="noopener noreferrer" aria-label="Open Siddharth Srinivasan on IMDb" className={`text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-none hover:italic transition-all duration-300 mt-3 sm:mt-4 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>IMDB</a>
               </div>
 
               <div className={`${activeView === 'home' ? 'sm:col-span-1 xl:col-span-2' : 'sm:col-span-1 xl:col-span-3'} min-w-0 flex flex-col xl:items-end text-left xl:text-right`}>
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Base</span>
-                  <p className="text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-[1.1]">MUMBAI</p>
-                  <p className={`text-[clamp(1.15rem,2.25vw,2.5rem)] font-sans font-light uppercase leading-none mt-2 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>INDIA</p>
+                  <p className="text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-[1.2]">MUMBAI</p>
+                  <p className={`text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-none mt-2 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>INDIA</p>
                   <div className="mt-5 sm:mt-8 flex items-center gap-2">
                      <div className={`w-2 h-2 rounded-full animate-pulse ${theme === 'dark' ? 'bg-white' : 'bg-black'}`} />
                      <span className={`font-mono text-[9px] tracking-[0.2em] uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-500'}`}>Available Worldwide</span>
