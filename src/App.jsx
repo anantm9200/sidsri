@@ -1129,7 +1129,7 @@ const App = () => {
 
               <div className={`${activeView === 'home' ? 'sm:col-span-1 xl:col-span-4' : 'sm:col-span-1 xl:col-span-5'} min-w-0 flex flex-col`}>
                   <span className={`font-mono text-[9px] tracking-[0.3em] uppercase mb-4 sm:mb-6 ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>Direct Inquiries</span>
-                  <a href="mailto:hello@siddharth.com" className={`max-w-full text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-[1.2] break-words hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>HELLO@SIDDHARTH.COM</a>
+                  <a href="mailto:MAIL@SIDDHARTHSRINIVASAN.COM" className={`max-w-full text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-[1.2] break-words hover:italic transition-all duration-300 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>MAIL@SIDDHARTHSRINIVASAN.COM</a>
                   <a href="tel:+919819391864" className={`text-sm sm:text-base lg:text-lg font-sans font-light uppercase leading-none whitespace-nowrap hover:italic transition-all duration-300 mt-3 sm:mt-4 ${theme === 'dark' ? 'hover:text-neutral-300' : 'hover:text-neutral-600'}`}>+91 98193 91864</a>
               </div>
 
