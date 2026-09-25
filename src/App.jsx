@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 
 const HERO_IMAGES = [
   "https://static.wixstatic.com/media/548938_f62846ba164e46ef9c722e67b3ae2076~mv2.jpg",
@@ -1160,6 +1161,7 @@ const App = () => {
            </div>
         </footer>
       </div>
+      <Analytics />
     </div>
   );
 };
