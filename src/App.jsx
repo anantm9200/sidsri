@@ -191,6 +191,13 @@ const COMMERCIAL_WORK = [
     link: 'https://vimeo.com/1233340194',
   },
   {
+    id: 33,
+    title: 'VIVO V27',
+    category: 'COMMERCIAL',
+    image: 'https://i.vimeocdn.com/video/1670231235-e01965db7936054cd433c502188f372e04afc45c52b730aa02d20e86499ffe0c-d_1280?region=us',
+    link: 'https://vimeo.com/810797934',
+  },
+  {
     id: 5,
     title: 'PAATAL LOK PROMO x Jaideep Ahlawat',
     category: 'COMMERCIAL',
