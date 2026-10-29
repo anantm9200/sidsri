@@ -412,13 +412,6 @@ const NARRATIVE_VIDEO_PLAYLIST = NARRATIVE_WORK.flatMap((work) =>
   }))
 );
 
-const getPagination = (current, total, windowSize = 5) => {
-  const start = Math.floor(current / windowSize) * windowSize;
-  const visibleCount = Math.min(windowSize, total - start);
-
-  return Array.from({ length: visibleCount }, (_, index) => start + index);
-};
-
 const getVimeoEmbedUrl = (link) => {
   const videoId = link.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1];
   return videoId
@@ -652,10 +645,6 @@ const App = () => {
             letter-spacing: 0.12em;
           }
 
-          .hero-page-button:not([aria-current='true']) {
-            display: none;
-          }
-
           .hero-stage {
             height: 52svh;
           }
@@ -871,59 +860,12 @@ const App = () => {
                       // Increased transition duration to 2.5s for a much slower, softer dissolve
                       transition={{ duration: 2.5, ease: "easeInOut" }}
                       className="absolute w-full h-full object-contain"
-                      alt={`Cinematic still ${currentImageIndex + 1} of ${HERO_IMAGES.length}`}
+                      alt={`Cinematography portfolio image ${currentImageIndex + 1} by Siddharth Srinivasan`}
                     />
                   </AnimatePresence>
                 </div>
 
-                <div className="w-full mt-4 sm:mt-6 lg:mt-8 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 sm:gap-4">
-                   
-                   {/* Left-aligned Previous Button */}
-                   <button 
-                     onClick={() => setCurrentImageIndex((prev) => Math.max(prev - 1, 0))}
-                     disabled={currentImageIndex === 0}
-                     aria-label="Show previous image"
-                     className={`font-mono text-[10px] md:text-xs tracking-[0.16em] sm:tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap disabled:opacity-25 disabled:cursor-not-allowed ${
-                       theme === 'dark' ? 'text-neutral-400 enabled:hover:text-white' : 'text-neutral-500 enabled:hover:text-black'
-                     }`}
-                   >
-                     <span className="text-[10px] md:text-xs mb-[2px]">←</span>
-                     <span className="hidden sm:inline">PREV</span>
-                   </button>
-
-                   {/* Center-aligned Numbers */}
-                   <div className="min-w-0 flex justify-center gap-1 sm:gap-2 md:gap-4 items-center">
-                      {getPagination(currentImageIndex, HERO_IMAGES.length).map((page, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setCurrentImageIndex(page)}
-                          aria-label={`Show image ${page + 1}`}
-                          aria-current={page === currentImageIndex ? 'true' : undefined}
-                          className={`hero-page-button font-mono text-sm md:text-base tracking-widest transition-colors duration-300 min-w-[24px] sm:min-w-[28px] text-center ${
-                            page === currentImageIndex 
-                              ? (theme === 'dark' ? 'text-white font-bold' : 'text-black font-bold') 
-                              : (theme === 'dark' ? 'text-neutral-600 hover:text-white' : 'text-neutral-400 hover:text-black')
-                          }`}
-                        >
-                          {page + 1}
-                        </button>
-                      ))}
-                   </div>
-                   
-                   {/* Right-aligned Next Button */}
-                   <button 
-                     onClick={() => setCurrentImageIndex((prev) => Math.min(prev + 1, HERO_IMAGES.length - 1))}
-                     disabled={currentImageIndex === HERO_IMAGES.length - 1}
-                     aria-label="Show next image"
-                     className={`font-mono text-[10px] md:text-xs tracking-[0.16em] sm:tracking-[0.2em] uppercase transition-colors duration-300 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap disabled:opacity-25 disabled:cursor-not-allowed ${
-                       theme === 'dark' ? 'text-neutral-400 enabled:hover:text-white' : 'text-neutral-500 enabled:hover:text-black'
-                     }`}
-                   >
-                     <span className="hidden sm:inline">NEXT</span>
-                     <span className="text-[10px] md:text-xs mb-[2px]">→</span>
-                   </button>
                 </div>
-              </div>
 
               {/* Normal-flow positioning prevents overlap on short landscape screens. */}
               <div className="site-gutter hero-lower-nav w-full mt-8 sm:mt-10 flex justify-between items-end gap-4 pointer-events-none z-40">
@@ -938,7 +880,7 @@ const App = () => {
                         onClick={() => { setActiveView('narratives'); window.scrollTo(0,0); }}
                     >
                         <div className="flex items-center gap-4">
-                            <span className={`font-mono text-[clamp(13px,2vw,22px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
+                            <span className={`font-mono text-[clamp(16px,2.4vw,28px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>NARRATIVES</span>
                         </div>
                         <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
                            <div className={`absolute inset-0 origin-left scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
@@ -957,7 +899,7 @@ const App = () => {
                         onClick={() => { setActiveView('commercial'); window.scrollTo(0,0); }}
                     >
                         <div className="flex items-center gap-4">
-                            <span className={`font-mono text-[clamp(13px,2vw,22px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:-translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIALS</span>
+                            <span className={`font-mono text-[clamp(16px,2.4vw,28px)] tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:-translate-x-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>COMMERCIALS</span>
                         </div>
                         <div className={`w-full h-[1px] mt-1 relative overflow-hidden ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}>
                            <div className={`absolute inset-0 origin-right scale-x-0 transition-transform duration-500 ease-[0.19,1,0.22,1] group-hover:scale-x-100 ${theme === 'dark' ? 'bg-white/50' : 'bg-black/50'}`} />
@@ -1163,7 +1105,7 @@ const App = () => {
                  <span className={`font-mono text-[9px] tracking-[0.3em] uppercase whitespace-nowrap ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>© {new Date().getFullYear()}</span>
                  <span className={`font-mono text-[9px] tracking-[0.16em] sm:tracking-[0.3em] uppercase ${theme === 'dark' ? 'text-neutral-600' : 'text-neutral-400'}`}>ALL RIGHTS RESERVED</span>
                </div>
-               <h1 className={`footer-signature shrink-0 text-right font-sans font-light tracking-[0.04em] uppercase leading-none whitespace-nowrap ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>SIDDHARTH</h1>
+               <p className={`footer-signature shrink-0 text-right font-sans font-light tracking-[0.04em] uppercase leading-none whitespace-nowrap ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>SIDDHARTH</p>
            </div>
         </footer>
       </div>
